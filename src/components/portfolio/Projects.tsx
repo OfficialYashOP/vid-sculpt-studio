@@ -91,10 +91,10 @@ function Card({ project }: { project: Project }) {
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={`group relative overflow-hidden rounded-2xl border border-border ${
-        project.featured ? "sm:col-span-2 lg:row-span-2" : ""
+        project.featured ? "sm:col-span-2" : ""
       }`}
     >
-      <div className={`relative w-full overflow-hidden ${project.featured ? "h-full min-h-[22rem]" : "aspect-[4/3]"}`}>
+      <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
         <img
           src={project.image}
           alt={project.title}
