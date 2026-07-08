@@ -1,21 +1,33 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Play, Lock, X } from "lucide-react";
+import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
 import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
-import ugc from "@/assets/proj-ugc.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
 import panda from "@/assets/panda-thumb.png.asset.json";
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
+import ugcPoster from "@/assets/ugc-poster.jpg.asset.json";
 import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
+import coffeePoster from "@/assets/coffee-poster.jpg.asset.json";
 import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
 import haircareVideo2 from "@/assets/haircare-ad-2.mp4.asset.json";
+import haircarePoster1 from "@/assets/haircare-ad-1-poster.jpg.asset.json";
+import haircarePoster2 from "@/assets/haircare-ad-2-poster.jpg.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
+
+interface VideoItem {
+  label: string;
+  poster: string;
+  /** Direct video file URL — plays inline in the popup. */
+  src?: string;
+  /** External link (e.g. YouTube) — opens in a new tab. */
+  link?: string;
+}
 
 interface Project {
   title: string;
@@ -27,7 +39,7 @@ interface Project {
   meta?: string;
   link?: string;
   privacy?: boolean;
-  video?: string;
+  videos?: VideoItem[];
 }
 
 const projects: Project[] = [
@@ -50,36 +62,32 @@ const projects: Project[] = [
     link: "https://www.youtube.com/watch?v=g4vHot5uwmg",
   },
   {
-    title: "Pixar-Style Hair Care Ad",
+    title: "Pixar-Style Hair Care Ads",
     category: "Product Ads",
     image: haircare,
-    hook: "Stylized 3D-animation-inspired product ad for a hair care brand.",
+    hook: "Stylized 3D-animation-inspired product ads for a hair care brand.",
     tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
-    video: haircareVideo1.url,
-  },
-  {
-    title: "Pixar-Style Hair Care Ad — Part 2",
-    category: "Product Ads",
-    image: haircare,
-    hook: "A second stylized, Pixar-inspired product ad in the hair care series.",
-    tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
-    video: haircareVideo2.url,
+    meta: "2 videos",
+    videos: [
+      { label: "Video 1", src: haircareVideo1.url, poster: haircarePoster1.url },
+      { label: "Video 2", src: haircareVideo2.url, poster: haircarePoster2.url },
+    ],
   },
   {
     title: "UGC-Style Reel",
     category: "UGC",
-    image: ugc,
+    image: ugcPoster.url,
     hook: "An authentic, creator-style short-form ad built to feel native to social feeds.",
     tags: ["Seedance 2.0", "UGC", "Social Ad"],
-    video: ugcVideo.url,
+    videos: [{ label: "Play reel", src: ugcVideo.url, poster: ugcPoster.url }],
   },
   {
     title: "Professional Coffee Ad",
     category: "Product Ads",
-    image: coffee,
+    image: coffeePoster.url,
     hook: "A polished, premium-look product commercial for a coffee brand.",
     tags: ["Kling 3.0", "Product Commercial"],
-    video: coffeeVideo.url,
+    videos: [{ label: "Play ad", src: coffeeVideo.url, poster: coffeePoster.url }],
   },
   {
     title: "Panda Animation Series",
@@ -87,15 +95,11 @@ const projects: Project[] = [
     image: panda.url,
     hook: "Short animated videos featuring an expressive panda character.",
     tags: ["Veo 3.1", "Character Animation"],
-    link: "https://youtu.be/2b8YqZWY1B0",
-  },
-  {
-    title: "Panda Animation — Part 2",
-    category: "Animation",
-    image: panda.url,
-    hook: "A second short in the panda animation series, continuing the expressive character storytelling.",
-    tags: ["Veo 3.1", "Character Animation"],
-    link: "https://youtu.be/BMA1o_VeWzc",
+    meta: "2 videos",
+    videos: [
+      { label: "Video 1", link: "https://youtu.be/2b8YqZWY1B0", poster: panda.url },
+      { label: "Video 2", link: "https://youtu.be/BMA1o_VeWzc", poster: panda.url },
+    ],
   },
   {
     title: "Candy Montage Ad",
@@ -117,9 +121,97 @@ const projects: Project[] = [
 
 const filters = ["All", "Short Film", "Product Ads", "UGC", "Animation", "AI Influencers"] as const;
 
+function VideoModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const videos = project.videos ?? [];
+  const single = videos.length === 1;
+  const [selected, setSelected] = useState<number | null>(single ? 0 : null);
+  const active = selected !== null ? videos[selected] : null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground hover:border-gold/40"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-4xl"
+      >
+        {active && active.src ? (
+          <video
+            key={active.src}
+            src={active.src}
+            poster={active.poster}
+            controls
+            autoPlay
+            playsInline
+            preload="auto"
+            className="mx-auto max-h-[70vh] w-auto max-w-full rounded-xl border border-border shadow-2xl"
+          />
+        ) : (
+          <div className="mb-2 text-center">
+            <h3 className="font-display text-2xl tracking-tight">{project.title}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">Select a video to play</p>
+          </div>
+        )}
+
+        {videos.length > 1 && (
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {videos.map((v, i) => {
+              const isActive = selected === i;
+              const content = (
+                <>
+                  <img
+                    src={v.poster}
+                    alt={v.label}
+                    className="aspect-video w-full object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-background/30 opacity-0 transition-opacity group-hover/thumb:opacity-100">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/90 text-primary-foreground">
+                      {v.link ? <ExternalLink className="h-5 w-5" /> : <Play className="h-5 w-5 translate-x-0.5" fill="currentColor" />}
+                    </span>
+                  </div>
+                  <span className="absolute bottom-2 left-2 rounded-md bg-background/70 px-2 py-0.5 text-xs font-medium text-foreground">
+                    {v.label}
+                  </span>
+                </>
+              );
+              const cls = `group/thumb relative overflow-hidden rounded-lg border text-left transition-colors ${
+                isActive ? "border-gold" : "border-border hover:border-gold/50"
+              }`;
+              return v.link ? (
+                <a key={v.label} href={v.link} target="_blank" rel="noreferrer" className={cls}>
+                  {content}
+                </a>
+              ) : (
+                <button key={v.label} type="button" onClick={() => setSelected(i)} className={cls}>
+                  {content}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const hasVideos = !!project.videos?.length;
+
   return (
     <motion.article
       layout
@@ -170,7 +262,7 @@ function Card({ project }: { project: Project }) {
           aria-label={`${project.title} — client privacy notice`}
           className="absolute inset-0 z-10"
         />
-      ) : project.video ? (
+      ) : hasVideos ? (
         <button
           type="button"
           onClick={() => setShowVideo(true)}
@@ -218,30 +310,8 @@ function Card({ project }: { project: Project }) {
       </div>
 
       <AnimatePresence>
-        {project.video && showVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowVideo(false)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
-          >
-            <button
-              type="button"
-              onClick={() => setShowVideo(false)}
-              aria-label="Close video"
-              className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground hover:border-gold/40"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <video
-              src={project.video}
-              controls
-              autoPlay
-              onClick={(e) => e.stopPropagation()}
-              className="max-h-[85vh] w-auto max-w-5xl rounded-xl border border-border shadow-2xl"
-            />
-          </motion.div>
+        {hasVideos && showVideo && (
+          <VideoModal project={project} onClose={() => setShowVideo(false)} />
         )}
       </AnimatePresence>
     </motion.article>
