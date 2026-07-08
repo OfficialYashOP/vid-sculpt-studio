@@ -109,6 +109,7 @@ const filters = ["All", "Short Film", "Product Ads", "UGC", "Animation", "AI Inf
 
 function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
   return (
     <motion.article
       layout
