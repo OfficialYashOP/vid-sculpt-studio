@@ -15,7 +15,7 @@ export function About() {
         <Reveal className="relative mx-auto w-full max-w-sm">
           <div className="absolute -inset-3 rounded-[2rem] bg-gold/20 blur-2xl" />
           <img
-            src={portrait}
+            src={portrait.url}
             alt="Portrait of Yash Pandey"
             loading="lazy"
             width={800}
