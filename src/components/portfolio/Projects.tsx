@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Play } from "lucide-react";
+import { Play, Lock } from "lucide-react";
 import { Reveal } from "./Reveal";
 import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
