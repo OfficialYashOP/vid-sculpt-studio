@@ -35,6 +35,15 @@ const projects: Project[] = [
     link: "https://youtu.be/uRsxW4OFLBE",
   },
   {
+    title: "Seedance 2 — AI Short Film",
+    category: "Short Film",
+    image: seedance2.url,
+    hook: "A 12-minute AI-generated short film created with Seedance 2 — a cinematic, studio-grade production made entirely with AI video tools and crafted for storytelling, pacing, and sound.",
+    tags: ["Seedance 2", "12 Minutes", "AI Short Film"],
+    featured: true,
+    link: "https://www.youtube.com/watch?v=g4vHot5uwmg",
+  },
+  {
     title: "Pixar-Style Hair Care Ads",
     category: "Product Ads",
     image: haircare,
