@@ -365,6 +365,13 @@ function Card({ project }: { project: Project }) {
           aria-label={`Play ${project.title}`}
           className="absolute inset-0 z-10"
         />
+      ) : youTubeId ? (
+        <button
+          type="button"
+          onClick={() => setShowYouTube(true)}
+          aria-label={`Watch ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
       ) : (
         project.link && (
           <a
