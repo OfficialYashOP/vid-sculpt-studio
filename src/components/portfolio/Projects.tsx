@@ -61,6 +61,7 @@ const projects: Project[] = [
     image: ugc,
     hook: "An authentic, creator-style short-form ad built to feel native to social feeds.",
     tags: ["Seedance 2.0", "UGC", "Social Ad"],
+    video: ugcVideo.url,
   },
   {
     title: "Professional Coffee Ad",
@@ -68,6 +69,7 @@ const projects: Project[] = [
     image: coffee,
     hook: "A polished, premium-look product commercial for a coffee brand.",
     tags: ["Kling 3.0", "Product Commercial"],
+    video: coffeeVideo.url,
   },
   {
     title: "Panda Animation Series",
