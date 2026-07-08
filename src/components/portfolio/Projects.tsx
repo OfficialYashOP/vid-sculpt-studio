@@ -103,6 +103,7 @@ const projects: Project[] = [
 const filters = ["All", "Short Film", "Product Ads", "UGC", "Animation", "AI Influencers"] as const;
 
 function Card({ project }: { project: Project }) {
+  const [showPrivacy, setShowPrivacy] = useState(false);
   return (
     <motion.article
       layout
