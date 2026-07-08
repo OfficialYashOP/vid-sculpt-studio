@@ -160,6 +160,13 @@ function Card({ project }: { project: Project }) {
           aria-label={`${project.title} — client privacy notice`}
           className="absolute inset-0 z-10"
         />
+      ) : project.video ? (
+        <button
+          type="button"
+          onClick={() => setShowVideo(true)}
+          aria-label={`Play ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
       ) : (
         project.link && (
           <a
