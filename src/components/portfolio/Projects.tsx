@@ -17,6 +17,10 @@ import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
 import haircareVideo2 from "@/assets/haircare-ad-2.mp4.asset.json";
 import haircarePoster1 from "@/assets/haircare-ad-1-poster.jpg.asset.json";
 import haircarePoster2 from "@/assets/haircare-ad-2-poster.jpg.asset.json";
+import pandaBabyVideo from "@/assets/panda-baby.mp4.asset.json";
+import pandaForestVideo from "@/assets/panda-forest.mp4.asset.json";
+import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
+import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
