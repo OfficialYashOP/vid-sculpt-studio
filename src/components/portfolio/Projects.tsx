@@ -68,10 +68,11 @@ const projects: Project[] = [
   {
     title: "Panda Animation Series",
     category: "Animation",
-    image: panda,
+    image: panda.url,
     hook: "Short animated videos featuring an expressive panda character.",
     tags: ["Veo 3.1", "Character Animation"],
     meta: "2 videos",
+    link: "https://youtu.be/2b8YqZWY1B0",
   },
   {
     title: "Candy Montage Ad",
