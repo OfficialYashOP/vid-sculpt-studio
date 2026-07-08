@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
-import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
@@ -47,15 +46,6 @@ interface Project {
 }
 
 const projects: Project[] = [
-  {
-    title: "Oryx and Crake — 3D Pixar AI Film",
-    category: "Short Film",
-    image: oryxCrake.url,
-    hook: "A 12-minute cinematic adaptation of Margaret Atwood's Oryx and Crake, brought to life in a 3D Pixar-inspired style — generated entirely with AI and edited for pacing, storytelling, and sound design.",
-    tags: ["3D Pixar Style", "12 Minutes", "Literary Adaptation"],
-    featured: true,
-    link: "https://youtu.be/uRsxW4OFLBE",
-  },
   {
     title: "Seedance 2 — AI Short Film",
     category: "Short Film",
