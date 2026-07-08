@@ -150,63 +150,92 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-4xl"
+        className="w-full max-w-5xl"
       >
         {active && active.src ? (
-          <video
-            key={active.src}
-            src={active.src}
-            poster={active.poster}
-            controls
-            autoPlay
-            playsInline
-            preload="auto"
-            className="mx-auto max-h-[70vh] w-auto max-w-full rounded-xl border border-border shadow-2xl"
-          />
+          <>
+            <video
+              key={active.src}
+              src={active.src}
+              poster={active.poster}
+              controls
+              autoPlay
+              playsInline
+              preload="auto"
+              className="mx-auto max-h-[70vh] w-auto max-w-full rounded-xl border border-border shadow-2xl"
+            />
+            {videos.length > 1 && (
+              <div className="mx-auto mt-4 flex max-w-full flex-wrap justify-center gap-3">
+                {videos.map((v, i) => {
+                  const isActive = selected === i;
+                  return (
+                    <button
+                      key={v.label}
+                      type="button"
+                      onClick={() => setSelected(i)}
+                      className={`group/thumb relative w-40 shrink-0 overflow-hidden rounded-lg border text-left transition-colors ${
+                        isActive ? "border-gold" : "border-border hover:border-gold/50"
+                      }`}
+                    >
+                      <img src={v.poster} alt={v.label} className="aspect-video w-full object-cover" />
+                      {!isActive && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-background/40 opacity-0 transition-opacity group-hover/thumb:opacity-100">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/90 text-primary-foreground">
+                            <Play className="h-4 w-4 translate-x-0.5" fill="currentColor" />
+                          </span>
+                        </div>
+                      )}
+                      <span className="absolute bottom-1.5 left-1.5 rounded-md bg-background/70 px-1.5 py-0.5 text-[11px] font-medium text-foreground">
+                        {v.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </>
         ) : (
-          <div className="mb-2 text-center">
-            <h3 className="font-display text-2xl tracking-tight">{project.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Select a video to play</p>
-          </div>
-        )}
-
-        {videos.length > 1 && (
-          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {videos.map((v, i) => {
-              const isActive = selected === i;
-              const content = (
-                <>
-                  <img
-                    src={v.poster}
-                    alt={v.label}
-                    className="aspect-video w-full object-cover"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/30 opacity-0 transition-opacity group-hover/thumb:opacity-100">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/90 text-primary-foreground">
-                      {v.link ? <ExternalLink className="h-5 w-5" /> : <Play className="h-5 w-5 translate-x-0.5" fill="currentColor" />}
+          <div>
+            <div className="mb-6 text-center">
+              <h3 className="font-display text-2xl tracking-tight sm:text-3xl">{project.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Choose a video to play</p>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {videos.map((v, i) => {
+                const content = (
+                  <>
+                    <img
+                      src={v.poster}
+                      alt={v.label}
+                      className="aspect-video w-full object-cover transition-transform duration-500 group-hover/thumb:scale-105"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-background/25 transition-colors group-hover/thumb:bg-background/40">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg transition-transform duration-300 group-hover/thumb:scale-110">
+                        {v.link ? <ExternalLink className="h-6 w-6" /> : <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />}
+                      </span>
+                    </div>
+                    <span className="absolute bottom-3 left-3 rounded-md bg-background/70 px-2.5 py-1 text-sm font-medium text-foreground">
+                      {v.label}
                     </span>
-                  </div>
-                  <span className="absolute bottom-2 left-2 rounded-md bg-background/70 px-2 py-0.5 text-xs font-medium text-foreground">
-                    {v.label}
-                  </span>
-                </>
-              );
-              const cls = `group/thumb relative overflow-hidden rounded-lg border text-left transition-colors ${
-                isActive ? "border-gold" : "border-border hover:border-gold/50"
-              }`;
-              return v.link ? (
-                <a key={v.label} href={v.link} target="_blank" rel="noreferrer" className={cls}>
-                  {content}
-                </a>
-              ) : (
-                <button key={v.label} type="button" onClick={() => setSelected(i)} className={cls}>
-                  {content}
-                </button>
-              );
-            })}
+                  </>
+                );
+                const cls =
+                  "group/thumb relative block overflow-hidden rounded-xl border border-border shadow-lg transition-colors hover:border-gold/60";
+                return v.link ? (
+                  <a key={v.label} href={v.link} target="_blank" rel="noreferrer" className={cls}>
+                    {content}
+                  </a>
+                ) : (
+                  <button key={v.label} type="button" onClick={() => setSelected(i)} className={cls}>
+                    {content}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
+
     </motion.div>
   );
 }
