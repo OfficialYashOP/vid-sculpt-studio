@@ -6,7 +6,7 @@ import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
-import panda from "@/assets/panda-thumb.png.asset.json";
+
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
@@ -17,6 +17,10 @@ import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
 import haircareVideo2 from "@/assets/haircare-ad-2.mp4.asset.json";
 import haircarePoster1 from "@/assets/haircare-ad-1-poster.jpg.asset.json";
 import haircarePoster2 from "@/assets/haircare-ad-2-poster.jpg.asset.json";
+import pandaBabyVideo from "@/assets/panda-baby.mp4.asset.json";
+import pandaForestVideo from "@/assets/panda-forest.mp4.asset.json";
+import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
+import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
@@ -92,13 +96,13 @@ const projects: Project[] = [
   {
     title: "Panda Animation Series",
     category: "Animation",
-    image: panda.url,
+    image: pandaBabyPoster.url,
     hook: "Short animated videos featuring an expressive panda character.",
     tags: ["Veo 3.1", "Character Animation"],
     meta: "2 videos",
     videos: [
-      { label: "Video 1", link: "https://youtu.be/2b8YqZWY1B0", poster: panda.url },
-      { label: "Video 2", link: "https://youtu.be/BMA1o_VeWzc", poster: panda.url },
+      { label: "Baby Panda in the Snow", src: pandaBabyVideo.url, poster: pandaBabyPoster.url },
+      { label: "Magical Forest Hide & Seek", src: pandaForestVideo.url, poster: pandaForestPoster.url },
     ],
   },
   {
