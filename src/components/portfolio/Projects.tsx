@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Play } from "lucide-react";
 import { Reveal } from "./Reveal";
-import shortfilm from "@/assets/proj-shortfilm.jpg";
+import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import ugc from "@/assets/proj-ugc.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
@@ -20,16 +20,18 @@ interface Project {
   tags: string[];
   featured?: boolean;
   meta?: string;
+  link?: string;
 }
 
 const projects: Project[] = [
   {
-    title: "12-Minute AI Short Film",
+    title: "Oryx and Crake — AI Short Film",
     category: "Short Film",
-    image: shortfilm,
-    hook: "A full cinematic literary adaptation — generated entirely and edited for pacing, storytelling, and sound design.",
-    tags: ["Seedance 2.0", "Literary Adaptation", "Cinematic Short Film"],
+    image: oryxCrake.url,
+    hook: "A 12-minute cinematic adaptation of Margaret Atwood's Oryx and Crake, brought to life in a 3D Pixar-inspired style — generated entirely with AI and edited for pacing, storytelling, and sound design.",
+    tags: ["3D Pixar Style", "12 Minutes", "Literary Adaptation"],
     featured: true,
+    link: "https://youtu.be/uRsxW4OFLBE",
   },
   {
     title: "Pixar-Style Hair Care Ads",
@@ -107,6 +109,16 @@ function Card({ project }: { project: Project }) {
           </span>
         </div>
       </div>
+
+      {project.link && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Watch ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
+      )}
 
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
         <div className="mb-3 flex flex-wrap gap-2">
