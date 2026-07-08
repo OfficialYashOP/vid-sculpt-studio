@@ -110,6 +110,16 @@ function Card({ project }: { project: Project }) {
         </div>
       </div>
 
+      {project.link && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Watch ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
+      )}
+
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
         <div className="mb-3 flex flex-wrap gap-2">
           {project.tags.map((t) => (
