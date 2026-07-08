@@ -10,6 +10,8 @@ import coffee from "@/assets/proj-coffee.jpg";
 import panda from "@/assets/panda-thumb.png.asset.json";
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
+import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
+import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
