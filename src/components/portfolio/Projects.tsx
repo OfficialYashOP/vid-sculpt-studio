@@ -416,6 +416,9 @@ function Card({ project }: { project: Project }) {
         {hasVideos && showVideo && (
           <VideoModal project={project} onClose={() => setShowVideo(false)} />
         )}
+        {youTubeId && showYouTube && (
+          <YouTubeModal id={youTubeId} onClose={() => setShowYouTube(false)} />
+        )}
       </AnimatePresence>
     </motion.article>
   );
