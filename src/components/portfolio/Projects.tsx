@@ -286,7 +286,26 @@ function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
 function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [showYouTube, setShowYouTube] = useState(false);
   const hasVideos = !!project.videos?.length;
+  const youTubeId = project.link ? getYouTubeId(project.link) : null;
+  const cardRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!showPrivacy) return;
+    const handleOutside = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setShowPrivacy(false);
+      }
+    };
+    const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setShowPrivacy(false);
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("keydown", handleEsc);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [showPrivacy]);
 
   return (
     <motion.article
