@@ -7,7 +7,7 @@ import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import ugc from "@/assets/proj-ugc.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
-import panda from "@/assets/proj-panda.jpg";
+import panda from "@/assets/panda-thumb.png.asset.json";
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 
@@ -68,10 +68,18 @@ const projects: Project[] = [
   {
     title: "Panda Animation Series",
     category: "Animation",
-    image: panda,
+    image: panda.url,
     hook: "Short animated videos featuring an expressive panda character.",
     tags: ["Veo 3.1", "Character Animation"],
-    meta: "2 videos",
+    link: "https://youtu.be/2b8YqZWY1B0",
+  },
+  {
+    title: "Panda Animation — Part 2",
+    category: "Animation",
+    image: panda.url,
+    hook: "A second short in the panda animation series, continuing the expressive character storytelling.",
+    tags: ["Veo 3.1", "Character Animation"],
+    link: "https://youtu.be/BMA1o_VeWzc",
   },
   {
     title: "Candy Montage Ad",
