@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/yash-portrait.png.asset.json";
 
 const stats = [
   { value: "7+", label: "Years Experience" },
@@ -15,7 +15,7 @@ export function About() {
         <Reveal className="relative mx-auto w-full max-w-sm">
           <div className="absolute -inset-3 rounded-[2rem] bg-gold/20 blur-2xl" />
           <img
-            src={portrait}
+            src={portrait.url}
             alt="Portrait of Yash Pandey"
             loading="lazy"
             width={800}
