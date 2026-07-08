@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Play } from "lucide-react";
 import { Reveal } from "./Reveal";
-import shortfilm from "@/assets/proj-shortfilm.jpg";
+import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import ugc from "@/assets/proj-ugc.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
