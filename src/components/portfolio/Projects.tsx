@@ -7,7 +7,7 @@ import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import ugc from "@/assets/proj-ugc.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
-import panda from "@/assets/proj-panda.jpg";
+import panda from "@/assets/panda-thumb.png.asset.json";
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 
