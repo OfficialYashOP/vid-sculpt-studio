@@ -73,8 +73,8 @@ const projects: Project[] = [
     tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
     meta: "2 videos",
     videos: [
-      { label: "Video 1", src: haircareVideo1.url, poster: haircarePoster1.url },
-      { label: "Video 2", src: haircareVideo2.url, poster: haircarePoster2.url },
+      { label: "9:16 TikTok Style Ad", src: haircareVideo1.url, poster: haircarePoster1.url },
+      { label: "16:9 Cinematic Ad", src: haircareVideo2.url, poster: haircarePoster2.url },
     ],
   },
   {
