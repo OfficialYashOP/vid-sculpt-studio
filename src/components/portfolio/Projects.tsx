@@ -96,13 +96,13 @@ const projects: Project[] = [
   {
     title: "Panda Animation Series",
     category: "Animation",
-    image: panda.url,
+    image: pandaBabyPoster.url,
     hook: "Short animated videos featuring an expressive panda character.",
     tags: ["Veo 3.1", "Character Animation"],
     meta: "2 videos",
     videos: [
-      { label: "Video 1", link: "https://youtu.be/2b8YqZWY1B0", poster: panda.url },
-      { label: "Video 2", link: "https://youtu.be/BMA1o_VeWzc", poster: panda.url },
+      { label: "Baby Panda in the Snow", src: pandaBabyVideo.url, poster: pandaBabyPoster.url },
+      { label: "Magical Forest Hide & Seek", src: pandaForestVideo.url, poster: pandaForestPoster.url },
     ],
   },
   {
