@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Play } from "lucide-react";
+import { Play, Lock } from "lucide-react";
 import { Reveal } from "./Reveal";
 import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
@@ -22,6 +22,7 @@ interface Project {
   featured?: boolean;
   meta?: string;
   link?: string;
+  privacy?: boolean;
 }
 
 const projects: Project[] = [
@@ -95,12 +96,14 @@ const projects: Project[] = [
     hook: "Fully AI-generated virtual influencer personas with consistent character design.",
     tags: ["AI Influencer", "Character Design", "Client Work"],
     meta: "2 clients",
+    privacy: true,
   },
 ];
 
 const filters = ["All", "Short Film", "Product Ads", "UGC", "Animation", "AI Influencers"] as const;
 
 function Card({ project }: { project: Project }) {
+  const [showPrivacy, setShowPrivacy] = useState(false);
   return (
     <motion.article
       layout
@@ -123,19 +126,44 @@ function Card({ project }: { project: Project }) {
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:opacity-100">
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg">
-            <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
+            {project.privacy ? (
+              <Lock className="h-6 w-6" />
+            ) : (
+              <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
+            )}
           </span>
         </div>
+
+        {project.privacy && showPrivacy && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/85 p-6 text-center backdrop-blur-sm">
+            <div>
+              <Lock className="mx-auto mb-3 h-7 w-7 text-gold" />
+              <p className="text-sm leading-relaxed text-foreground">
+                We can't show these due to client privacy — both models combined
+                have over <span className="font-semibold text-gold">150K followers</span>.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
-      {project.link && (
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Watch ${project.title}`}
+      {project.privacy ? (
+        <button
+          type="button"
+          onClick={() => setShowPrivacy((v) => !v)}
+          aria-label={`${project.title} — client privacy notice`}
           className="absolute inset-0 z-10"
         />
+      ) : (
+        project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Watch ${project.title}`}
+            className="absolute inset-0 z-10"
+          />
+        )
       )}
 
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
