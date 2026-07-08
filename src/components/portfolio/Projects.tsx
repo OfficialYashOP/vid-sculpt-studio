@@ -25,6 +25,7 @@ interface Project {
   meta?: string;
   link?: string;
   privacy?: boolean;
+  video?: string;
 }
 
 const projects: Project[] = [
