@@ -12,6 +12,8 @@ import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
 import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
+import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
+import haircareVideo2 from "@/assets/haircare-ad-2.mp4.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
