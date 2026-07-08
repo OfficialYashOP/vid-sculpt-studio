@@ -58,7 +58,7 @@ const projects: Project[] = [
   {
     title: "Pixar-Style Hair Care Ads",
     category: "Product Ads",
-    image: haircare,
+    image: haircare.url,
     hook: "Stylized 3D-animation-inspired product ads for a hair care brand.",
     tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
     meta: "2 videos",
@@ -98,7 +98,7 @@ const projects: Project[] = [
   {
     title: "Candy Montage Ad",
     category: "Product Ads",
-    image: candy,
+    image: candy.url,
     hook: "A clean, visually satisfying product montage built for quick social consumption.",
     tags: ["Seedance 2", "AI Video", "Product Montage"],
   },
