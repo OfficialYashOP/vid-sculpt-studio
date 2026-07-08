@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/yash-portrait.png.asset.json";
 
 const stats = [
   { value: "7+", label: "Years Experience" },
