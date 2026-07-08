@@ -71,8 +71,15 @@ const projects: Project[] = [
     image: panda.url,
     hook: "Short animated videos featuring an expressive panda character.",
     tags: ["Veo 3.1", "Character Animation"],
-    meta: "2 videos",
     link: "https://youtu.be/2b8YqZWY1B0",
+  },
+  {
+    title: "Panda Animation — Part 2",
+    category: "Animation",
+    image: panda.url,
+    hook: "A second short in the panda animation series, continuing the expressive character storytelling.",
+    tags: ["Veo 3.1", "Character Animation"],
+    link: "https://youtu.be/BMA1o_VeWzc",
   },
   {
     title: "Candy Montage Ad",
