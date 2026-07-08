@@ -5,11 +5,21 @@ const timeline = [
   {
     role: "AI Video Creator & Editor",
     org: "Freelance / Independent",
+    period: "2024 – Present",
+    points: [
+      "Produce long-form and short-form video content using advanced editing and AI pipelines.",
+      "Deliver AI-generated short films, ads, UGC content, and AI influencer builds for clients.",
+      "Design thumbnails and visuals, optimizing content strategy for engagement and performance.",
+    ],
+  },
+  {
+    role: "Content Creator / Video Editor",
+    org: "YouTube / Independent",
     period: "2018 – Present",
     points: [
-      "Produced long-form and short-form video content using advanced editing and AI tools.",
-      "Delivered AI-generated short films, ads, UGC content, and AI influencer builds for clients.",
-      "Designed thumbnails and visuals, optimized content strategy for engagement and performance.",
+      "Created and grew a YouTube channel to 50K+ subscribers.",
+      "Edited long-form storytelling, shorts, and promotional videos across multiple niches.",
+      "Built audience-first content strategy, thumbnails, and brand voice from the ground up.",
     ],
   },
 ];
@@ -18,12 +28,7 @@ const education = [
   {
     degree: "B.Tech, Computer Science & Engineering",
     school: "Lovely Professional University, Punjab",
-    period: "2022 – Present",
-  },
-  {
-    degree: "12th, Science",
-    school: "Green Field Sr Sec School, Jaipur",
-    period: "80%",
+    period: "2022 – 2026",
   },
 ];
 
