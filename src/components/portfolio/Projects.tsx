@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
@@ -110,14 +110,20 @@ const projects: Project[] = [
     category: "Product Ads",
     image: candy,
     hook: "A clean, visually satisfying product montage built for quick social consumption.",
-    tags: ["AI Video", "Product Montage"],
+    tags: ["Seedance 2", "AI Video", "Product Montage"],
   },
   {
     title: "AI Influencer Creation",
     category: "AI Influencers",
     image: influencer,
     hook: "Fully AI-generated virtual influencer personas with consistent character design.",
-    tags: ["AI Influencer", "Character Design", "Client Work"],
+    tags: [
+      "Character Consistency",
+      "Character Reels",
+      "Kling Motion Control",
+      "Nano Banana Pro",
+      "Seedance 2",
+    ],
     meta: "2 clients",
     privacy: true,
   },
@@ -240,13 +246,70 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
   );
 }
 
+function getYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground hover:border-gold/40"
+      >
+        <X className="h-5 w-5" />
+      </button>
+      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-5xl">
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border shadow-2xl">
+          <iframe
+            src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [showYouTube, setShowYouTube] = useState(false);
   const hasVideos = !!project.videos?.length;
+  const youTubeId = project.link ? getYouTubeId(project.link) : null;
+  const cardRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!showPrivacy) return;
+    const handleOutside = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setShowPrivacy(false);
+      }
+    };
+    const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setShowPrivacy(false);
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("keydown", handleEsc);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [showPrivacy]);
 
   return (
     <motion.article
+      ref={cardRef}
       layout
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -302,6 +365,13 @@ function Card({ project }: { project: Project }) {
           aria-label={`Play ${project.title}`}
           className="absolute inset-0 z-10"
         />
+      ) : youTubeId ? (
+        <button
+          type="button"
+          onClick={() => setShowYouTube(true)}
+          aria-label={`Watch ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
       ) : (
         project.link && (
           <a
@@ -345,6 +415,9 @@ function Card({ project }: { project: Project }) {
       <AnimatePresence>
         {hasVideos && showVideo && (
           <VideoModal project={project} onClose={() => setShowVideo(false)} />
+        )}
+        {youTubeId && showYouTube && (
+          <YouTubeModal id={youTubeId} onClose={() => setShowYouTube(false)} />
         )}
       </AnimatePresence>
     </motion.article>
