@@ -12,6 +12,8 @@ import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
 import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
+import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
+import haircareVideo2 from "@/assets/haircare-ad-2.mp4.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
@@ -48,12 +50,20 @@ const projects: Project[] = [
     link: "https://www.youtube.com/watch?v=g4vHot5uwmg",
   },
   {
-    title: "Pixar-Style Hair Care Ads",
+    title: "Pixar-Style Hair Care Ad",
     category: "Product Ads",
     image: haircare,
-    hook: "Stylized 3D-animation-inspired product ads for a hair care brand.",
+    hook: "Stylized 3D-animation-inspired product ad for a hair care brand.",
     tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
-    meta: "2 videos",
+    video: haircareVideo1.url,
+  },
+  {
+    title: "Pixar-Style Hair Care Ad — Part 2",
+    category: "Product Ads",
+    image: haircare,
+    hook: "A second stylized, Pixar-inspired product ad in the hair care series.",
+    tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
+    video: haircareVideo2.url,
   },
   {
     title: "UGC-Style Reel",
