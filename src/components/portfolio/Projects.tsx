@@ -48,7 +48,7 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Oryx and Crake — AI Short Film",
+    title: "Oryx and Crake — 3D Pixar AI Film",
     category: "Short Film",
     image: oryxCrake.url,
     hook: "A 12-minute cinematic adaptation of Margaret Atwood's Oryx and Crake, brought to life in a 3D Pixar-inspired style — generated entirely with AI and edited for pacing, storytelling, and sound design.",
