@@ -3,10 +3,10 @@ import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
-import haircare from "@/assets/proj-haircare.jpg";
+import haircare from "@/assets/haircare-thumb.png.asset.json";
 import coffee from "@/assets/proj-coffee.jpg";
 
-import candy from "@/assets/proj-candy.jpg";
+import candy from "@/assets/candy-thumb.png.asset.json";
 import influencer from "@/assets/proj-influencer.jpg";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
 import ugcPoster from "@/assets/ugc-girl-thumbnail.png.asset.json";
