@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Play } from "lucide-react";
 import { Reveal } from "./Reveal";
 import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
+import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/proj-haircare.jpg";
 import ugc from "@/assets/proj-ugc.jpg";
 import coffee from "@/assets/proj-coffee.jpg";
@@ -32,6 +33,15 @@ const projects: Project[] = [
     tags: ["3D Pixar Style", "12 Minutes", "Literary Adaptation"],
     featured: true,
     link: "https://youtu.be/uRsxW4OFLBE",
+  },
+  {
+    title: "Seedance 2 — AI Short Film",
+    category: "Short Film",
+    image: seedance2.url,
+    hook: "A 12-minute AI-generated short film created with Seedance 2 — a cinematic, studio-grade production made entirely with AI video tools and crafted for storytelling, pacing, and sound.",
+    tags: ["Seedance 2", "12 Minutes", "AI Short Film"],
+    featured: true,
+    link: "https://www.youtube.com/watch?v=g4vHot5uwmg",
   },
   {
     title: "Pixar-Style Hair Care Ads",
