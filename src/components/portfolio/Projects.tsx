@@ -96,6 +96,7 @@ const projects: Project[] = [
     hook: "Fully AI-generated virtual influencer personas with consistent character design.",
     tags: ["AI Influencer", "Character Design", "Client Work"],
     meta: "2 clients",
+    privacy: true,
   },
 ];
 
