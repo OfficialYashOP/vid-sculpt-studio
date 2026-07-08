@@ -206,6 +206,34 @@ function Card({ project }: { project: Project }) {
           {project.hook}
         </p>
       </div>
+
+      <AnimatePresence>
+        {project.video && showVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowVideo(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+          >
+            <button
+              type="button"
+              onClick={() => setShowVideo(false)}
+              aria-label="Close video"
+              className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground hover:border-gold/40"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <video
+              src={project.video}
+              controls
+              autoPlay
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[85vh] w-auto max-w-5xl rounded-xl border border-border shadow-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.article>
   );
 }
