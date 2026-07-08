@@ -246,6 +246,43 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
   );
 }
 
+function getYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground hover:border-gold/40"
+      >
+        <X className="h-5 w-5" />
+      </button>
+      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-5xl">
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border shadow-2xl">
+          <iframe
+            src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
