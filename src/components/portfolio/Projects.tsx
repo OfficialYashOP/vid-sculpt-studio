@@ -22,6 +22,7 @@ interface Project {
   featured?: boolean;
   meta?: string;
   link?: string;
+  privacy?: boolean;
 }
 
 const projects: Project[] = [
