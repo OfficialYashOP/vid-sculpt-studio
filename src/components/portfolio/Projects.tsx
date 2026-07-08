@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Play, Lock } from "lucide-react";
+import { Play, Lock, X } from "lucide-react";
 import { Reveal } from "./Reveal";
 import oryxCrake from "@/assets/oryx-crake-thumb.jpeg.asset.json";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
@@ -10,6 +10,8 @@ import coffee from "@/assets/proj-coffee.jpg";
 import panda from "@/assets/panda-thumb.png.asset.json";
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
+import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
+import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
@@ -23,6 +25,7 @@ interface Project {
   meta?: string;
   link?: string;
   privacy?: boolean;
+  video?: string;
 }
 
 const projects: Project[] = [
@@ -58,6 +61,7 @@ const projects: Project[] = [
     image: ugc,
     hook: "An authentic, creator-style short-form ad built to feel native to social feeds.",
     tags: ["Seedance 2.0", "UGC", "Social Ad"],
+    video: ugcVideo.url,
   },
   {
     title: "Professional Coffee Ad",
@@ -65,6 +69,7 @@ const projects: Project[] = [
     image: coffee,
     hook: "A polished, premium-look product commercial for a coffee brand.",
     tags: ["Kling 3.0", "Product Commercial"],
+    video: coffeeVideo.url,
   },
   {
     title: "Panda Animation Series",
@@ -104,6 +109,7 @@ const filters = ["All", "Short Film", "Product Ads", "UGC", "Animation", "AI Inf
 
 function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
   return (
     <motion.article
       layout
@@ -154,6 +160,13 @@ function Card({ project }: { project: Project }) {
           aria-label={`${project.title} — client privacy notice`}
           className="absolute inset-0 z-10"
         />
+      ) : project.video ? (
+        <button
+          type="button"
+          onClick={() => setShowVideo(true)}
+          aria-label={`Play ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
       ) : (
         project.link && (
           <a
@@ -193,6 +206,34 @@ function Card({ project }: { project: Project }) {
           {project.hook}
         </p>
       </div>
+
+      <AnimatePresence>
+        {project.video && showVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowVideo(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+          >
+            <button
+              type="button"
+              onClick={() => setShowVideo(false)}
+              aria-label="Close video"
+              className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/60 text-foreground hover:border-gold/40"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <video
+              src={project.video}
+              controls
+              autoPlay
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[85vh] w-auto max-w-5xl rounded-xl border border-border shadow-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.article>
   );
 }
