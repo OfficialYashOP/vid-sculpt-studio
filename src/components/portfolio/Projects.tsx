@@ -10,7 +10,7 @@ import coffee from "@/assets/proj-coffee.jpg";
 import candy from "@/assets/proj-candy.jpg";
 import influencer from "@/assets/proj-influencer.jpg";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
-import ugcPoster from "@/assets/ugc-poster.jpg.asset.json";
+import ugcPoster from "@/assets/ugc-girl-thumbnail.png.asset.json";
 import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
 import coffeePoster from "@/assets/coffee-poster.jpg.asset.json";
 import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
