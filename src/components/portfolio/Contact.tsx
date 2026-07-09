@@ -55,8 +55,8 @@ export function Contact() {
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
-        <div className="space-y-4">
+      <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="min-w-0 space-y-4">
           {contacts.map((c, i) => (
             <Reveal key={c.label} delay={i}>
               <StarBorder color="rgba(230, 179, 82, 0.7)" speed="7s" thickness={1.5}>
