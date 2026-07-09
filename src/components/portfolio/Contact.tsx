@@ -135,9 +135,10 @@ export function Contact() {
             <StarBorder color="rgba(230, 179, 82, 0.95)" speed="4s" thickness={2} className="rounded-full">
               <button
                 type="submit"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
+                disabled={sending}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send Message
+                {sending ? "Sending..." : "Send Message"}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </StarBorder>
