@@ -378,8 +378,8 @@ function Card({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/70 to-transparent" />
 
-        <div className="absolute left-1/2 top-[38%] z-30 -translate-x-1/2 -translate-y-1/2 opacity-80 scale-90 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100 sm:top-1/2 sm:opacity-0 sm:scale-75 sm:group-hover:opacity-100 sm:group-hover:scale-100">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg transition-transform duration-300 group-hover:scale-110 group-active:scale-95 sm:h-16 sm:w-16">
+        <div className="absolute right-3 top-3 z-30 opacity-90 transition-all duration-300 ease-out group-hover:opacity-100 sm:right-4 sm:top-4">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-active:scale-95 sm:h-12 sm:w-12">
             {project.privacy ? (
               <Lock className="h-5 w-5 sm:h-6 sm:w-6" />
             ) : (
