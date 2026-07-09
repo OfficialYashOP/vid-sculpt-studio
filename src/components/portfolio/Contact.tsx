@@ -116,13 +116,16 @@ export function Contact() {
                 className="w-full resize-none rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-gold"
               />
             </div>
-            <button
-              type="submit"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
-            >
-              Send Message
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            <StarBorder color="rgba(230, 179, 82, 0.95)" speed="4s" thickness={2} className="rounded-full">
+              <button
+                type="submit"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
+              >
+                Send Message
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </StarBorder>
+
           </form>
         </Reveal>
       </div>
