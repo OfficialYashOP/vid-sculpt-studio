@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import Aurora from "@/components/Aurora";
 import BlurText from "@/components/BlurText";
+import StarBorder from "@/components/StarBorder";
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
