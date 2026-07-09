@@ -42,12 +42,12 @@ export function Contact() {
     }
     setSending(true);
     try {
-      const { error } = await supabase.from("contact_messages").insert({
-        name: result.data.name,
-        email: result.data.email,
-        message: result.data.message,
+      const res = await fetch("/api/public/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.data),
       });
-      if (error) throw error;
+      if (!res.ok) throw new Error("send failed");
       toast.success("Thanks! Your message has been sent — I'll get back to you soon.");
       setForm({ name: "", email: "", message: "" });
     } catch {
