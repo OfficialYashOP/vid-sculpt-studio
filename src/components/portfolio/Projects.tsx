@@ -405,11 +405,15 @@ function Card({ project }: { project: Project }) {
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/70 to-transparent" />
 
         <div className="absolute right-3 top-3 z-30 opacity-90 transition-all duration-300 ease-out group-hover:opacity-100 sm:right-4 sm:top-4">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-active:scale-95 sm:h-12 sm:w-12">
+          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover:bg-gold group-hover:text-primary-foreground group-hover:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover:ring-gold group-active:scale-90 sm:h-12 sm:w-12">
+            {/* pulsing halo on hover */}
+            {!project.privacy && (
+              <span className="pointer-events-none absolute inset-0 rounded-full bg-gold/40 opacity-0 transition-opacity duration-300 group-hover:animate-ping group-hover:opacity-70" />
+            )}
             {project.privacy ? (
-              <Lock className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Lock className="relative h-5 w-5 sm:h-6 sm:w-6" />
             ) : (
-              <Play className="h-5 w-5 translate-x-0.5 sm:h-6 sm:w-6" fill="currentColor" />
+              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6" fill="currentColor" />
             )}
           </span>
         </div>
