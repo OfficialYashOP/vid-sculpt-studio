@@ -270,6 +270,7 @@ function getYouTubeId(url: string): string | null {
 }
 
 function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
+  useNavHideWhilePlaying();
   return (
     <motion.div
       initial={{ opacity: 0 }}
