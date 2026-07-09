@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg.jpg.asset.json";
 import Aurora from "@/components/Aurora";
 
 export function Hero() {
@@ -12,7 +12,7 @@ export function Hero() {
     <section id="home" className="grain relative flex min-h-svh items-center overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <img
-          src={heroBg}
+          src={heroBg.url}
           alt=""
           aria-hidden
           width={1920}

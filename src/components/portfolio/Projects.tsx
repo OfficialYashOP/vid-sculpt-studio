@@ -4,10 +4,8 @@ import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
 import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
 import haircare from "@/assets/haircare-thumb.png.asset.json";
-import coffee from "@/assets/proj-coffee.jpg";
-
 import candy from "@/assets/candy-thumb.png.asset.json";
-import influencer from "@/assets/proj-influencer.jpg";
+import influencer from "@/assets/proj-influencer.jpg.asset.json";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
 import ugcPoster from "@/assets/ugc-girl-thumbnail.png.asset.json";
 import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
@@ -105,7 +103,7 @@ const projects: Project[] = [
   {
     title: "AI Influencer Creation",
     category: "AI Influencers",
-    image: influencer,
+    image: influencer.url,
     hook: "Fully AI-generated virtual influencer personas with consistent character design.",
     tags: [
       "Character Consistency",
