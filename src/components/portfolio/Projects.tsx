@@ -341,7 +341,7 @@ function Card({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative h-full overflow-hidden rounded-[18px] bg-card"
+      className="group relative h-full overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
     >
       <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
         <img
