@@ -1,6 +1,7 @@
 import { Reveal } from "./Reveal";
 import BlurText from "@/components/BlurText";
 import ProfileCard from "@/components/ProfileCard";
+import BorderGlow from "@/components/BorderGlow";
 import portrait from "@/assets/yash-profile.png.asset.json";
 
 const stats = [
