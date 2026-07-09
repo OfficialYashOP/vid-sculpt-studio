@@ -96,11 +96,11 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Candy Montage Ad",
-    category: "Product Ads",
-    image: candy.url,
-    hook: "A clean, visually satisfying product montage built for quick social consumption.",
-    tags: ["Seedance 2", "AI Video", "Product Montage"],
+    title: "Rana Sanga — Animated History Film",
+    category: "Animation",
+    image: ranaSanga.url,
+    hook: "An AI-animated historical short retelling the story of Rana Sanga — dramatic, cinematic storytelling brought to life with AI video tools.",
+    tags: ["AI Animation", "History", "Cinematic Short"],
   },
   {
     title: "AI Influencer Creation",
