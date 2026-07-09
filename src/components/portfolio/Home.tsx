@@ -102,22 +102,22 @@ export function Home() {
               const inner = (
                 <StarBorder
                   color="rgba(230, 179, 82, 0.9)"
-                  speed="5s"
+                  speed="6s"
                   thickness={2}
                   className="h-full"
                 >
                   <SpotlightCard
-                    className="group flex h-full min-h-[320px] flex-col justify-between !bg-card/80 backdrop-blur-sm"
-                    spotlightColor="rgba(230, 179, 82, 0.18)"
+                    className="group flex h-full min-h-[340px] flex-col justify-between bg-gradient-to-br from-card via-card to-background/60 p-7 !ring-1 !ring-inset !ring-white/5 backdrop-blur-sm transition-transform duration-500 hover:-translate-y-1 sm:p-8"
+                    spotlightColor="rgba(230, 179, 82, 0.22)"
                   >
                     <div>
-                      <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                      <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-gold/25 to-gold/5 text-gold ring-1 ring-inset ring-gold/20 transition-transform duration-500 group-hover:scale-110">
                         {card.icon}
                       </div>
-                      <div className="mb-3 flex items-center gap-3">
+                      <div className="mb-3 flex flex-wrap items-center gap-3">
                         <h2 className="font-display text-3xl tracking-tight">{card.title}</h2>
                         {card.comingSoon && (
-                          <span className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                          <span className="inline-flex items-center gap-1 rounded-full border border-gold/20 bg-gold/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-gold/80">
                             <Clock className="h-3 w-3" /> Soon
                           </span>
                         )}
@@ -125,7 +125,7 @@ export function Home() {
                       <p className="text-sm leading-relaxed text-muted-foreground">{card.description}</p>
                     </div>
                     <div
-                      className={`mt-8 inline-flex items-center gap-2 text-sm font-semibold ${
+                      className={`mt-8 inline-flex items-center gap-2 border-t border-white/5 pt-5 text-sm font-semibold ${
                         card.comingSoon ? "text-muted-foreground" : "text-gold"
                       }`}
                     >
@@ -151,12 +151,13 @@ export function Home() {
                       {inner}
                     </Link>
                   ) : (
-                    <div className="h-full cursor-not-allowed opacity-80">{inner}</div>
+                    <div className="h-full cursor-not-allowed opacity-90">{inner}</div>
                   )}
                 </motion.div>
               );
             })}
           </div>
+
         </div>
       </section>
     </div>
