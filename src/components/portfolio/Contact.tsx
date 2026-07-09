@@ -82,7 +82,7 @@ export function Contact() {
           ))}
         </div>
 
-        <Reveal delay={1}>
+        <Reveal delay={1} className="min-w-0">
           <form onSubmit={onSubmit} className="glass space-y-4 rounded-2xl p-6 sm:p-8">
             <div>
               <label className="mb-1.5 block text-sm font-medium">Name</label>
