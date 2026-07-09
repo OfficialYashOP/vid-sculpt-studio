@@ -504,7 +504,7 @@ function Card({ project }: { project: Project }) {
           )}
         </div>
 
-        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr]">
+        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out motion-reduce:transition-none sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr]">
           <div className="overflow-hidden">
             <p className="mt-2.5 line-clamp-3 max-w-lg text-sm leading-relaxed text-muted-foreground/90 sm:line-clamp-none">
               {project.hook}
