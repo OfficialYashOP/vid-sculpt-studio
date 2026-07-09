@@ -1,8 +1,13 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
+import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+import Aurora from "@/components/Aurora";
 
 export function Hero() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <section id="home" className="grain relative flex min-h-svh items-center overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -14,6 +19,11 @@ export function Hero() {
           height={1280}
           className="h-full w-full object-cover opacity-70"
         />
+        {mounted && (
+          <div className="absolute inset-0 opacity-60 mix-blend-screen">
+            <Aurora colorStops={["#c9a24a", "#B497CF", "#5227FF"]} blend={0.5} amplitude={1.0} speed={0.5} />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,transparent,var(--background)_75%)]" />
       </div>
