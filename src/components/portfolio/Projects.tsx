@@ -341,7 +341,7 @@ function Card({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative h-full overflow-hidden rounded-[18px] bg-card"
+      className="group relative h-full overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
     >
       <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
         <img
@@ -413,14 +413,14 @@ function Card({ project }: { project: Project }) {
           {project.tags.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-gold/30 bg-background/40 px-2.5 py-1 text-[11px] font-medium text-gold backdrop-blur-sm"
+              className="rounded-full border border-gold/25 bg-background/50 px-2.5 py-1 text-[11px] font-medium tracking-wide text-gold backdrop-blur-sm"
             >
               {t}
             </span>
           ))}
         </div>
         <h3
-          className={`font-display tracking-tight ${
+          className={`font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
           }`}
         >
@@ -431,10 +431,11 @@ function Card({ project }: { project: Project }) {
             </span>
           )}
         </h3>
-        <p className="mt-1.5 max-w-lg text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground/90">
           {project.hook}
         </p>
       </div>
+
 
       <AnimatePresence>
         {hasVideos && showVideo && (

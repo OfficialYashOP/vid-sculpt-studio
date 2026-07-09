@@ -107,7 +107,7 @@ export function Home() {
                   className="h-full"
                 >
                   <SpotlightCard
-                    className="group flex h-full min-h-[340px] flex-col justify-between bg-gradient-to-br from-card via-card to-background/60 p-7 !ring-1 !ring-inset !ring-white/5 backdrop-blur-sm transition-transform duration-500 hover:-translate-y-1 sm:p-8"
+                    className="group flex h-full min-h-[340px] flex-col justify-between !rounded-[22px] bg-gradient-to-br from-card via-card to-background/60 p-7 shadow-card !ring-1 !ring-inset !ring-white/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-card-hover sm:p-8"
                     spotlightColor="rgba(230, 179, 82, 0.22)"
                   >
                     <div>

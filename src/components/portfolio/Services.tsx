@@ -62,13 +62,13 @@ export function Services() {
           <Reveal key={s.title} delay={i} className="h-full">
             <SpotlightCard
               spotlightColor="rgba(230, 179, 82, 0.18)"
-              className="group glass h-full !rounded-2xl p-7 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40"
+              className="group glass h-full !rounded-[22px] p-7 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card-hover"
             >
-              <div className="mb-6 inline-flex rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-500 group-hover:bg-gold group-hover:text-primary-foreground">
+              <div className="mb-6 inline-flex rounded-xl bg-gold/12 p-3 text-gold ring-1 ring-inset ring-gold/15 transition-colors duration-500 group-hover:bg-gold group-hover:text-primary-foreground">
                 <s.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold">{s.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+              <h3 className="text-lg font-bold tracking-tight">{s.title}</h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground/90">{s.desc}</p>
             </SpotlightCard>
           </Reveal>
         ))}

@@ -102,8 +102,9 @@ export function Skills() {
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={i}>
               <StarBorder color="rgba(230, 179, 82, 0.7)" speed="9s" thickness={1.5} className="h-full">
-                <div className="h-full rounded-[18px] bg-card/70 p-6 backdrop-blur-sm">
-                  <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-gold/80">
+                <div className="group h-full rounded-[22px] bg-gradient-to-br from-card/90 to-card/60 p-6 shadow-card ring-1 ring-inset ring-white/5 backdrop-blur-sm transition-shadow duration-500 hover:shadow-card-hover sm:p-7">
+                  <h3 className="mb-5 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold/80">
+                    <span className="h-px w-5 bg-gold/50" />
                     {g.title}
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
@@ -114,14 +115,14 @@ export function Skills() {
                           href={item.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
+                          className="rounded-full border border-border/80 bg-background/60 px-3.5 py-1.5 text-[13px] font-medium text-foreground/90 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10 hover:text-gold"
                         >
                           {item.name}
                         </a>
                       ) : (
                         <span
                           key={item.name}
-                          className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
+                          className="rounded-full border border-border/80 bg-background/60 px-3.5 py-1.5 text-[13px] font-medium text-foreground/90 transition-all duration-300 hover:border-gold hover:text-gold"
                         >
                           {item.name}
                         </span>
