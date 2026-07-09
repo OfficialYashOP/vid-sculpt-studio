@@ -5,7 +5,7 @@ import StarBorder from "@/components/StarBorder";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
-import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
+import seedance2 from "@/assets/seedance2-thumb.jpeg.asset.json";
 import haircare from "@/assets/haircare-thumb.png.asset.json";
 import ranaSanga from "@/assets/rana-sanga-thumb.webp.asset.json";
 import influencer from "@/assets/proj-influencer.jpg.asset.json";
