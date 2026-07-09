@@ -359,6 +359,14 @@ function Card({ project }: { project: Project }) {
   const visibleTags = showAllTags ? project.tags : project.tags.slice(0, MAX_TAGS);
   const hiddenCount = project.tags.length - visibleTags.length;
 
+  const activate = () => {
+    playPop();
+    if (project.privacy) setShowPrivacy((v) => !v);
+    else if (hasVideos) setShowVideo(true);
+    else if (youTubeId) setShowYouTube(true);
+    else if (project.link) window.open(project.link, "_blank", "noreferrer");
+  };
+
   useEffect(() => {
     if (!showPrivacy) return;
     const handleOutside = (e: MouseEvent) => {
@@ -391,7 +399,7 @@ function Card({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative h-full overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
     >
       <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
         <img
@@ -399,24 +407,32 @@ function Card({ project }: { project: Project }) {
           alt={project.title}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/70 to-transparent" />
+        {/* subtle top-right scrim just to keep the play button legible on bright frames */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-bl from-background/40 via-transparent to-transparent" />
 
-        <div className="absolute right-3 top-3 z-30 opacity-90 transition-all duration-300 ease-out group-hover:opacity-100 sm:right-4 sm:top-4">
-          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover:bg-gold group-hover:text-primary-foreground group-hover:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover:ring-gold group-active:scale-90 sm:h-12 sm:w-12">
-            {/* pulsing halo on hover */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            activate();
+          }}
+          aria-label={project.privacy ? `${project.title} — client privacy notice` : `Play ${project.title}`}
+          className="group/play absolute right-3 top-3 z-30 transition-opacity duration-300 sm:right-4 sm:top-4"
+        >
+          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover/play:bg-gold group-hover/play:text-primary-foreground group-hover/play:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover/play:ring-gold group-active/play:scale-90 motion-reduce:transition-none motion-reduce:group-active/play:scale-100 sm:h-12 sm:w-12">
+            {/* pulsing halo — only on direct play-button hover, disabled for reduced motion */}
             {!project.privacy && (
-              <span className="pointer-events-none absolute inset-0 rounded-full bg-gold/40 opacity-0 transition-opacity duration-300 group-hover:animate-ping group-hover:opacity-70" />
+              <span className="pointer-events-none absolute inset-0 rounded-full bg-gold/40 opacity-0 transition-opacity duration-300 group-hover/play:opacity-70 group-hover/play:motion-safe:animate-ping" />
             )}
             {project.privacy ? (
               <Lock className="relative h-5 w-5 sm:h-6 sm:w-6" />
             ) : (
-              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6" fill="currentColor" />
+              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover/play:scale-110 motion-reduce:transition-none motion-reduce:group-hover/play:scale-100 sm:h-6 sm:w-6" fill="currentColor" />
             )}
           </span>
-        </div>
+        </button>
 
         {project.privacy && showPrivacy && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/85 p-6 text-center backdrop-blur-sm">
@@ -429,51 +445,17 @@ function Card({ project }: { project: Project }) {
             </div>
           </div>
         )}
+
+        {/* whole-thumbnail click target (no hover animation — that's reserved for the play button) */}
+        <button
+          type="button"
+          onClick={activate}
+          aria-label={project.privacy ? `${project.title} — client privacy notice` : `Play ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
       </div>
 
-      {project.privacy ? (
-        <button
-          type="button"
-          onClick={() => {
-            playPop();
-            setShowPrivacy((v) => !v);
-          }}
-          aria-label={`${project.title} — client privacy notice`}
-          className="absolute inset-0 z-10"
-        />
-      ) : hasVideos ? (
-        <button
-          type="button"
-          onClick={() => {
-            playPop();
-            setShowVideo(true);
-          }}
-          aria-label={`Play ${project.title}`}
-          className="absolute inset-0 z-10"
-        />
-      ) : youTubeId ? (
-        <button
-          type="button"
-          onClick={() => {
-            playPop();
-            setShowYouTube(true);
-          }}
-          aria-label={`Watch ${project.title}`}
-          className="absolute inset-0 z-10"
-        />
-      ) : (
-        project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Watch ${project.title}`}
-            className="absolute inset-0 z-10"
-          />
-        )
-      )}
-
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background to-background/70 p-5 sm:p-6">
+      <div className="flex flex-1 flex-col bg-card p-5 sm:p-6">
         <h3
           className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
@@ -522,7 +504,7 @@ function Card({ project }: { project: Project }) {
           )}
         </div>
 
-        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr]">
+        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out motion-reduce:transition-none sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr]">
           <div className="overflow-hidden">
             <p className="mt-2.5 line-clamp-3 max-w-lg text-sm leading-relaxed text-muted-foreground/90 sm:line-clamp-none">
               {project.hook}
