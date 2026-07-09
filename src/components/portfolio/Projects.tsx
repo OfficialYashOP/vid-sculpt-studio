@@ -416,16 +416,6 @@ function Card({ project }: { project: Project }) {
       )}
 
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background to-background/70 p-5 sm:p-6">
-        <div className="mb-3.5 flex flex-wrap gap-1.5">
-          {project.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-gold/25 bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-gold backdrop-blur-sm"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
         <h3
           className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
@@ -438,10 +428,51 @@ function Card({ project }: { project: Project }) {
             </span>
           )}
         </h3>
-        <p className="mt-2.5 max-w-lg text-sm leading-relaxed text-muted-foreground/90">
-          {project.hook}
-        </p>
+
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+          {visibleTags.map((t) => (
+            <span
+              key={t}
+              className="rounded-full border border-gold/25 bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-gold backdrop-blur-sm"
+            >
+              {t}
+            </span>
+          ))}
+          {hiddenCount > 0 && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowAllTags(true);
+              }}
+              className="relative z-20 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[10.5px] font-semibold leading-none tracking-wide text-gold transition-colors hover:bg-gold/20"
+            >
+              +{hiddenCount} more
+            </button>
+          )}
+          {showAllTags && project.tags.length > MAX_TAGS && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowAllTags(false);
+              }}
+              className="relative z-20 rounded-full border border-border bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Show less
+            </button>
+          )}
+        </div>
+
+        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr]">
+          <div className="overflow-hidden">
+            <p className="mt-2.5 line-clamp-3 max-w-lg text-sm leading-relaxed text-muted-foreground/90 sm:line-clamp-none">
+              {project.hook}
+            </p>
+          </div>
+        </div>
       </div>
+
 
 
       <AnimatePresence>
