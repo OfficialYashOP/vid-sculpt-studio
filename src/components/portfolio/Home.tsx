@@ -54,7 +54,9 @@ export function Home() {
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           {mounted && (
             <div className="absolute inset-0 opacity-100">
-              <Aurora colorStops={["#7cff67", "#B497CF", "#5227FF"]} blend={0.35} amplitude={2.2} speed={0.7} />
+              <Suspense fallback={null}>
+                <Aurora colorStops={["#7cff67", "#B497CF", "#5227FF"]} blend={0.35} amplitude={2.2} speed={0.7} />
+              </Suspense>
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/10 to-background/85" />
