@@ -73,7 +73,7 @@ export function Contact() {
                     <p className="text-xs uppercase tracking-widest text-muted-foreground">
                       {c.label}
                     </p>
-                    <p className="break-words font-medium">{c.value}</p>
+                    <p className="font-medium [overflow-wrap:anywhere]">{c.value}</p>
                   </div>
                 </a>
               </StarBorder>
