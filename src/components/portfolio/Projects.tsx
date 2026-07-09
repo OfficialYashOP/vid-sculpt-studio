@@ -445,51 +445,17 @@ function Card({ project }: { project: Project }) {
             </div>
           </div>
         )}
+
+        {/* whole-thumbnail click target (no hover animation — that's reserved for the play button) */}
+        <button
+          type="button"
+          onClick={activate}
+          aria-label={project.privacy ? `${project.title} — client privacy notice` : `Play ${project.title}`}
+          className="absolute inset-0 z-10"
+        />
       </div>
 
-      {project.privacy ? (
-        <button
-          type="button"
-          onClick={() => {
-            playPop();
-            setShowPrivacy((v) => !v);
-          }}
-          aria-label={`${project.title} — client privacy notice`}
-          className="absolute inset-0 z-10"
-        />
-      ) : hasVideos ? (
-        <button
-          type="button"
-          onClick={() => {
-            playPop();
-            setShowVideo(true);
-          }}
-          aria-label={`Play ${project.title}`}
-          className="absolute inset-0 z-10"
-        />
-      ) : youTubeId ? (
-        <button
-          type="button"
-          onClick={() => {
-            playPop();
-            setShowYouTube(true);
-          }}
-          aria-label={`Watch ${project.title}`}
-          className="absolute inset-0 z-10"
-        />
-      ) : (
-        project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Watch ${project.title}`}
-            className="absolute inset-0 z-10"
-          />
-        )
-      )}
-
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background to-background/70 p-5 sm:p-6">
+      <div className="flex flex-1 flex-col bg-card p-5 sm:p-6">
         <h3
           className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
