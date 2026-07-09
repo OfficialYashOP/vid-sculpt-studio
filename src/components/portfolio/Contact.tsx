@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import BlurText from "@/components/BlurText";
 import StarBorder from "@/components/StarBorder";
+import BorderGlow from "@/components/BorderGlow";
 import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -75,7 +76,7 @@ export function Contact() {
         <div className="min-w-0 space-y-4">
           {contacts.map((c, i) => (
             <Reveal key={c.label} delay={i}>
-              <StarBorder color="rgba(230, 179, 82, 0.7)" speed="7s" thickness={1.5}>
+              <BorderGlow borderRadius={18} glowRadius={26} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}>
                 <a
                   href={c.href}
                   target={c.label === "LinkedIn" ? "_blank" : undefined}
@@ -92,13 +93,14 @@ export function Contact() {
                     <p className="font-medium [overflow-wrap:anywhere]">{c.value}</p>
                   </div>
                 </a>
-              </StarBorder>
+              </BorderGlow>
             </Reveal>
 
           ))}
         </div>
 
         <Reveal delay={1} className="min-w-0">
+          <BorderGlow borderRadius={16} glowRadius={30} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}>
           <form onSubmit={onSubmit} className="glass space-y-4 rounded-2xl p-6 sm:p-8">
             <div>
               <label className="mb-1.5 block text-sm font-medium">Name</label>
@@ -144,6 +146,7 @@ export function Contact() {
             </StarBorder>
 
           </form>
+          </BorderGlow>
         </Reveal>
       </div>
     </section>

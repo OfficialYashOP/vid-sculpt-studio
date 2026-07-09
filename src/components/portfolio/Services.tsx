@@ -1,5 +1,6 @@
 import BlurText from "@/components/BlurText";
 import SpotlightCard from "@/components/SpotlightCard";
+import BorderGlow from "@/components/BorderGlow";
 import {
   Clapperboard,
   Megaphone,
@@ -60,6 +61,14 @@ export function Services() {
       <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s, i) => (
           <Reveal key={s.title} delay={i} className="h-full">
+            <BorderGlow
+              borderRadius={22}
+              glowRadius={28}
+              glowColor="40 90 62"
+              backgroundColor="#17171b"
+              colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}
+              className="h-full"
+            >
             <SpotlightCard
               spotlightColor="rgba(230, 179, 82, 0.22)"
               className="group relative h-full overflow-hidden !rounded-[22px] border border-white/5 bg-gradient-to-br from-card/95 via-card/70 to-card/40 p-7 shadow-card backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-card-hover"
@@ -85,6 +94,7 @@ export function Services() {
               {/* bottom accent line */}
               <div className="relative mt-6 h-px w-10 bg-gold/30 transition-all duration-500 group-hover:w-16 group-hover:bg-gold" />
             </SpotlightCard>
+            </BorderGlow>
           </Reveal>
         ))}
       </div>

@@ -1,6 +1,6 @@
 import { Reveal } from "./Reveal";
 import BlurText from "@/components/BlurText";
-import StarBorder from "@/components/StarBorder";
+import BorderGlow from "@/components/BorderGlow";
 
 type Item = { name: string; url?: string };
 
@@ -101,7 +101,7 @@ export function Skills() {
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={i}>
-              <StarBorder color="rgba(230, 179, 82, 0.7)" speed="9s" thickness={1.5} className="h-full">
+              <BorderGlow borderRadius={22} glowRadius={28} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]} className="h-full">
                 <div className="group h-full rounded-[22px] bg-gradient-to-br from-card/90 to-card/60 p-6 shadow-card ring-1 ring-inset ring-white/5 backdrop-blur-sm transition-shadow duration-500 hover:shadow-card-hover sm:p-7">
                   <h3 className="mb-5 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold/80">
                     <span className="h-px w-5 bg-gold/50" />
@@ -130,7 +130,7 @@ export function Skills() {
                     )}
                   </div>
                 </div>
-              </StarBorder>
+              </BorderGlow>
             </Reveal>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import { Reveal } from "./Reveal";
 import BlurText from "@/components/BlurText";
 import ProfileCard from "@/components/ProfileCard";
+import BorderGlow from "@/components/BorderGlow";
 import portrait from "@/assets/yash-profile.png.asset.json";
 
 const stats = [
@@ -48,10 +49,12 @@ export function About() {
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {stats.map((s, i) => (
               <Reveal key={s.label} delay={i + 1}>
+                <BorderGlow borderRadius={16} glowRadius={22} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]} className="h-full">
                 <div className="glass h-full rounded-2xl p-5">
                   <p className="font-display text-3xl text-gold sm:text-4xl">{s.value}</p>
                   <p className="mt-1 text-xs leading-snug text-muted-foreground">{s.label}</p>
                 </div>
+                </BorderGlow>
               </Reveal>
             ))}
           </div>
