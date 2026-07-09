@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import Aurora from "@/components/Aurora";
+import BlurText from "@/components/BlurText";
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
