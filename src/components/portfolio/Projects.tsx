@@ -22,6 +22,7 @@ import pandaBabyVideo from "@/assets/panda-baby.mp4.asset.json";
 import pandaForestVideo from "@/assets/panda-forest.mp4.asset.json";
 import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
 import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
+import ranaSangaVideo from "@/assets/rana-sanga.mp4.asset.json";
 
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
@@ -103,6 +104,7 @@ const projects: Project[] = [
     image: ranaSanga.url,
     hook: "An AI-animated historical short retelling the story of Rana Sanga — dramatic, cinematic storytelling brought to life with AI video tools.",
     tags: ["AI Animation", "History", "Cinematic Short"],
+    videos: [{ label: "Play film", src: ranaSangaVideo.url, poster: ranaSanga.url }],
   },
   {
     title: "AI Influencer Creation",
