@@ -1,6 +1,6 @@
 import { Reveal } from "./Reveal";
 import ProfileCard from "@/components/ProfileCard";
-import portrait from "@/assets/yash-portrait.png.asset.json";
+import portrait from "@/assets/yash-profile.png.asset.json";
 
 const stats = [
   { value: "7+", label: "Years Experience" },
@@ -16,17 +16,11 @@ export function About() {
         <Reveal className="relative mx-auto w-full max-w-sm">
           <ProfileCard
             avatarUrl={portrait.url}
-            miniAvatarUrl={portrait.url}
             name="Yash Pandey"
             title="AI Video Creator & Editor"
-            handle="yash"
-            status="Available for work"
-            contactText="Contact"
+            showUserInfo={false}
             behindGlowEnabled
             innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
-            onContactClick={() => {
-              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-            }}
           />
         </Reveal>
 
