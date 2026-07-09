@@ -19,7 +19,7 @@ export function About() {
             name="Yash Pandey"
             title="AI Video Creator & Editor"
             showUserInfo={false}
-            behindGlowEnabled
+            behindGlowEnabled={false}
             innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
           />
         </Reveal>
