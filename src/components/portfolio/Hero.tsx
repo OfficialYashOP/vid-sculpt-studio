@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg.jpg.asset.json";
 import Aurora from "@/components/Aurora";
 
 export function Hero() {
