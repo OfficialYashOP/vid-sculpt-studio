@@ -351,7 +351,8 @@ function Card({ project }: { project: Project }) {
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background to-transparent" />
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:opacity-100">
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg">
@@ -410,29 +411,29 @@ function Card({ project }: { project: Project }) {
       )}
 
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-        <div className="mb-3 flex flex-wrap gap-2">
+        <div className="mb-3.5 flex flex-wrap gap-1.5">
           {project.tags.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-gold/25 bg-background/50 px-2.5 py-1 text-[11px] font-medium tracking-wide text-gold backdrop-blur-sm"
+              className="rounded-full border border-gold/25 bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-gold backdrop-blur-sm"
             >
               {t}
             </span>
           ))}
         </div>
         <h3
-          className={`font-display leading-tight tracking-tight ${
+          className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
           }`}
         >
-          {project.title}
+          <span>{project.title}</span>
           {project.meta && (
-            <span className="ml-2 align-middle text-sm font-sans font-medium text-muted-foreground">
+            <span className="text-sm font-sans font-medium text-muted-foreground">
               · {project.meta}
             </span>
           )}
         </h3>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground/90">
+        <p className="mt-2.5 max-w-lg text-sm leading-relaxed text-muted-foreground/90">
           {project.hook}
         </p>
       </div>
