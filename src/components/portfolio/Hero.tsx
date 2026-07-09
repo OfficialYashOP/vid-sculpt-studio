@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import Aurora from "@/components/Aurora";
+import BlurText from "@/components/BlurText";
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -29,14 +30,22 @@ export function Hero() {
           <span className="h-px w-10 bg-gold" /> Yash Pandey
         </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-4xl font-display text-6xl leading-[0.9] tracking-tight sm:text-8xl lg:text-[8.5rem]"
-        >
-          I Turn Ideas Into <span className="text-gradient-gold">Cinematic AI Videos</span>
-        </motion.h1>
+        <h1 className="max-w-4xl font-display text-6xl leading-[0.9] tracking-tight sm:text-8xl lg:text-[8.5rem]">
+          <BlurText
+            text="I Turn Ideas Into"
+            animateBy="words"
+            direction="top"
+            delay={120}
+            className="block"
+          />
+          <BlurText
+            text="Cinematic AI Videos"
+            animateBy="words"
+            direction="top"
+            delay={120}
+            className="text-gradient-gold"
+          />
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
