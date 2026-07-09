@@ -313,7 +313,8 @@ function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
           />
         </div>
       </div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 
