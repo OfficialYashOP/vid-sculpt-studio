@@ -66,14 +66,14 @@ export function Contact() {
                   rel="noreferrer"
                   className="group flex items-center gap-4 rounded-[18px] bg-card/70 p-5 transition-colors duration-300 hover:bg-card"
                 >
-                  <span className="inline-flex rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
+                  <span className="inline-flex shrink-0 rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
                     <c.icon className="h-5 w-5" />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs uppercase tracking-widest text-muted-foreground">
                       {c.label}
                     </p>
-                    <p className="font-medium">{c.value}</p>
+                    <p className="break-words font-medium">{c.value}</p>
                   </div>
                 </a>
               </StarBorder>
