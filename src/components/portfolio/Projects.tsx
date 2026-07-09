@@ -348,11 +348,13 @@ function Card({ project }: { project: Project }) {
   }, [showPrivacy]);
 
   return (
-    <StarBorder
-      color="rgba(230, 179, 82, 0.75)"
-      speed="8s"
-      thickness={1.5}
-      className={project.featured ? "sm:col-span-2" : ""}
+    <BorderGlow
+      borderRadius={22}
+      glowRadius={30}
+      glowColor="40 90 62"
+      backgroundColor="#17171b"
+      colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}
+      className={`h-full ${project.featured ? "sm:col-span-2" : ""}`.trim()}
     >
     <motion.article
       ref={cardRef}
