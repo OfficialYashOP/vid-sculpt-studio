@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import BlurText from "@/components/BlurText";
 import BorderGlow from "@/components/BorderGlow";
+import StarBorder from "@/components/StarBorder";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
@@ -327,6 +328,12 @@ function Card({ project }: { project: Project }) {
   }, [showPrivacy]);
 
   return (
+    <StarBorder
+      color="rgba(230, 179, 82, 0.75)"
+      speed="8s"
+      thickness={1.5}
+      className={project.featured ? "sm:col-span-2" : ""}
+    >
     <motion.article
       ref={cardRef}
       layout
@@ -334,9 +341,7 @@ function Card({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={`group relative overflow-hidden rounded-2xl border border-border ${
-        project.featured ? "sm:col-span-2" : ""
-      }`}
+      className="group relative h-full overflow-hidden rounded-[18px] bg-card"
     >
       <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
         <img
@@ -440,6 +445,7 @@ function Card({ project }: { project: Project }) {
         )}
       </AnimatePresence>
     </motion.article>
+    </StarBorder>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import BlurText from "@/components/BlurText";
+import StarBorder from "@/components/StarBorder";
 import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -58,23 +59,26 @@ export function Contact() {
         <div className="space-y-4">
           {contacts.map((c, i) => (
             <Reveal key={c.label} delay={i}>
-              <a
-                href={c.href}
-                target={c.label === "LinkedIn" ? "_blank" : undefined}
-                rel="noreferrer"
-                className="group flex items-center gap-4 rounded-2xl border border-border p-5 transition-all duration-300 hover:border-gold/40 hover:bg-card"
-              >
-                <span className="inline-flex rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
-                  <c.icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                    {c.label}
-                  </p>
-                  <p className="font-medium">{c.value}</p>
-                </div>
-              </a>
+              <StarBorder color="rgba(230, 179, 82, 0.7)" speed="7s" thickness={1.5}>
+                <a
+                  href={c.href}
+                  target={c.label === "LinkedIn" ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="group flex items-center gap-4 rounded-[18px] bg-card/70 p-5 transition-colors duration-300 hover:bg-card"
+                >
+                  <span className="inline-flex rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
+                    <c.icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                      {c.label}
+                    </p>
+                    <p className="font-medium">{c.value}</p>
+                  </div>
+                </a>
+              </StarBorder>
             </Reveal>
+
           ))}
         </div>
 
@@ -112,13 +116,16 @@ export function Contact() {
                 className="w-full resize-none rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-gold"
               />
             </div>
-            <button
-              type="submit"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
-            >
-              Send Message
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+            <StarBorder color="rgba(230, 179, 82, 0.95)" speed="4s" thickness={2} className="rounded-full">
+              <button
+                type="submit"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
+              >
+                Send Message
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </StarBorder>
+
           </form>
         </Reveal>
       </div>

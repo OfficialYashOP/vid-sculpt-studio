@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import Aurora from "@/components/Aurora";
 import BlurText from "@/components/BlurText";
+import StarBorder from "@/components/StarBorder";
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -63,20 +64,33 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <a
+          <StarBorder
+            as="a"
             href="#work"
-            className="group inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
+            color="rgba(230, 179, 82, 0.95)"
+            speed="4s"
+            thickness={2}
+            className="group !w-auto rounded-full"
           >
-            <Play className="h-4 w-4" /> View My Work
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
-          <a
+            <span className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 group-hover:glow-gold">
+              <Play className="h-4 w-4" /> View My Work
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </StarBorder>
+          <StarBorder
+            as="a"
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 hover:border-gold hover:text-gold"
+            color="rgba(230, 179, 82, 0.6)"
+            speed="6s"
+            thickness={1}
+            className="!w-auto rounded-full"
           >
-            Let's Talk
-          </a>
+            <span className="inline-flex items-center gap-2 rounded-full bg-background/60 px-7 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 hover:text-gold">
+              Let's Talk
+            </span>
+          </StarBorder>
         </motion.div>
+
       </div>
 
       <a
