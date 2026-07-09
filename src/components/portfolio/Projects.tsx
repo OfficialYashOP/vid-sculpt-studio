@@ -285,13 +285,14 @@ function getYouTubeId(url: string): string | null {
 
 function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
   useNavHideWhilePlaying();
-  return (
+  useLockBodyScroll();
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-background/98 p-4 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-background/98 p-4 backdrop-blur-xl"
     >
       <button
         type="button"
