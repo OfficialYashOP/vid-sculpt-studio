@@ -37,7 +37,7 @@ export function About() {
           </Reveal>
           <Reveal delay={1}>
             <h2 className="max-w-xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-              <GradientText colors={["#e6b352", "#f4b8d0", "#8fd0ff", "#e6b352"]} animationSpeed={6}>
+              <GradientText colors={["#e6b352", "#f4b8d0", "#8fd0ff", "#e6b352"]} animationSpeed={6} className="!max-w-full [&>.text-content]:whitespace-normal">
                 A storyteller wired for the AI era
               </GradientText>
             </h2>
