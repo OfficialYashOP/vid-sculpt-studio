@@ -61,16 +61,29 @@ export function Services() {
         {services.map((s, i) => (
           <Reveal key={s.title} delay={i} className="h-full">
             <SpotlightCard
-              spotlightColor="rgba(230, 179, 82, 0.18)"
-              className="group glass h-full !rounded-[22px] p-7 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-card-hover"
+              spotlightColor="rgba(230, 179, 82, 0.22)"
+              className="group relative h-full overflow-hidden !rounded-[22px] border border-white/5 bg-gradient-to-br from-card/95 via-card/70 to-card/40 p-7 shadow-card backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-card-hover"
             >
-              <div className="mb-6 inline-flex rounded-xl bg-gold/12 p-3 text-gold ring-1 ring-inset ring-gold/15 transition-colors duration-500 group-hover:bg-gold group-hover:text-primary-foreground">
+              {/* glow accent */}
+              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              {/* top gradient hairline */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              {/* index badge */}
+              <span className="absolute right-6 top-6 font-display text-4xl font-bold leading-none text-white/[0.04] transition-colors duration-500 group-hover:text-gold/15">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <div className="relative mb-6 inline-flex rounded-xl bg-gradient-to-br from-gold/20 to-gold/5 p-3.5 text-gold ring-1 ring-inset ring-gold/20 transition-all duration-500 group-hover:from-gold group-hover:to-gold group-hover:text-primary-foreground group-hover:shadow-[0_8px_24px_-8px_rgba(230,179,82,0.6)]">
                 <s.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight">
+              <h3 className="relative text-lg font-bold tracking-tight transition-colors duration-500 group-hover:text-gold">
                 <BlurText text={s.title} animateBy="words" className="flex-wrap" />
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground/90">{s.desc}</p>
+              <p className="relative mt-2.5 text-sm leading-relaxed text-muted-foreground/90">{s.desc}</p>
+
+              {/* bottom accent line */}
+              <div className="relative mt-6 h-px w-10 bg-gold/30 transition-all duration-500 group-hover:w-16 group-hover:bg-gold" />
             </SpotlightCard>
           </Reveal>
         ))}
