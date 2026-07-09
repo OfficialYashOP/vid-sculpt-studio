@@ -81,11 +81,13 @@ export function Experience() {
           <div className="space-y-4">
             {education.map((e, i) => (
               <Reveal key={e.degree} delay={i + 1}>
+                <BorderGlow borderRadius={16} glowRadius={26} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}>
                 <div className="glass rounded-2xl p-5">
                   <p className="font-semibold">{e.degree}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{e.school}</p>
                   <p className="mt-1 text-xs font-medium text-gold">{e.period}</p>
                 </div>
+                </BorderGlow>
               </Reveal>
             ))}
           </div>
