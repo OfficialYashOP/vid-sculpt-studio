@@ -17,14 +17,16 @@ export function About() {
     <section id="about" className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
       <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal className="relative mx-auto w-full max-w-sm">
-          <ProfileCard
-            avatarUrl={portrait.url}
-            name="Yash Pandey"
-            title="AI Video Creator & Editor"
-            showUserInfo={false}
-            behindGlowEnabled={false}
-            innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
-          />
+          <BorderGlow borderRadius={30} glowRadius={40} glowColor="40 90 62" backgroundColor="#0f0e13" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}>
+            <ProfileCard
+              avatarUrl={portrait.url}
+              name="Yash Pandey"
+              title="AI Video Creator & Editor"
+              showUserInfo={false}
+              behindGlowEnabled={false}
+              innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+            />
+          </BorderGlow>
         </Reveal>
 
         <div>
