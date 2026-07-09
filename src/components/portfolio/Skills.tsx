@@ -1,26 +1,84 @@
 import { Reveal } from "./Reveal";
 import BlurText from "@/components/BlurText";
 
-const groups = [
+type Item = { name: string; url?: string };
+
+const groups: { title: string; items: Item[] }[] = [
   {
-    title: "Video Editing",
-    items: ["Adobe Premiere Pro", "Wondershare Filmora", "Sound Design"],
+    title: "AI Video Models",
+    items: [
+      { name: "Kling 3.0" },
+      { name: "Seedance 2" },
+      { name: "Veo 3.1" },
+      { name: "Wan 2.7" },
+      { name: "Omni Flash" },
+      { name: "LTX Video" },
+      { name: "Kling Motion Control" },
+      { name: "Grok Imagine" },
+      { name: "Runway Gen-4" },
+      { name: "Luma Ray 3" },
+      { name: "Pika 2.2" },
+      { name: "Hailuo / MiniMax" },
+    ],
   },
   {
-    title: "AI Video Tools",
-    items: ["Runway ML", "Pika", "Kling AI", "Google Veo", "Seedance", "Image-to-Video Models"],
+    title: "AI Image Models",
+    items: [
+      { name: "Seedream 5 Pro" },
+      { name: "Nano Banana Pro" },
+      { name: "GPT Image 2" },
+      { name: "Midjourney v7" },
+      { name: "Flux 1.1 Ultra" },
+      { name: "Grok Imagine" },
+      { name: "Ideogram 3.0" },
+      { name: "Recraft V3" },
+    ],
   },
   {
-    title: "AI Image Tools",
-    items: ["Midjourney", "GPT Image 2", "Nano Banana Pro"],
+    title: "AI Platforms & Tools",
+    items: [
+      { name: "Higgsfield AI", url: "https://higgsfield.ai/" },
+      { name: "OpenArt", url: "https://openart.ai/" },
+      { name: "Dreamina (CapCut)", url: "https://dreamina.capcut.com/" },
+      { name: "Adobe Firefly", url: "https://firefly.adobe.com/" },
+      { name: "Hedra", url: "https://www.hedra.com/" },
+      { name: "Runway ML", url: "https://runwayml.com/" },
+      { name: "Pika", url: "https://pika.art/" },
+      { name: "Kling AI", url: "https://klingai.com/" },
+      { name: "Google Flow / Veo", url: "https://labs.google/fx/tools/flow" },
+      { name: "Krea AI", url: "https://www.krea.ai/" },
+      { name: "Freepik AI", url: "https://www.freepik.com/ai" },
+    ],
   },
   {
-    title: "Design",
-    items: ["Photoshop", "Thumbnail Design", "Visual Composition"],
+    title: "Research Models",
+    items: [
+      { name: "Claude Fable" },
+      { name: "Claude Opus" },
+      { name: "GPT-5.5" },
+      { name: "Gemini 3 Pro" },
+      { name: "Grok 4" },
+    ],
+  },
+  {
+    title: "Editing & Design",
+    items: [
+      { name: "Adobe Premiere Pro" },
+      { name: "Wondershare Filmora" },
+      { name: "Canva", url: "https://www.canva.com/" },
+      { name: "Photoshop" },
+      { name: "Sound Design" },
+      { name: "Thumbnail Design" },
+    ],
   },
   {
     title: "Strategy",
-    items: ["Audience Retention", "Trend Analysis", "Content Strategy", "Creative Direction"],
+    items: [
+      { name: "Audience Retention" },
+      { name: "Trend Analysis" },
+      { name: "Content Strategy" },
+      { name: "Creative Direction" },
+    ],
   },
 ];
 
@@ -46,14 +104,26 @@ export function Skills() {
                 {g.title}
               </h3>
               <div className="flex flex-wrap gap-2.5">
-                {g.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
-                  >
-                    {item}
-                  </span>
-                ))}
+                {g.items.map((item) =>
+                  item.url ? (
+                    <a
+                      key={item.name}
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
+                    >
+                      {item.name}
+                    </a>
+                  ) : (
+                    <span
+                      key={item.name}
+                      className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
+                    >
+                      {item.name}
+                    </span>
+                  )
+                )}
               </div>
             </Reveal>
           ))}

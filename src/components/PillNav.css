@@ -24,7 +24,22 @@
   align-items: center;
   gap: 8px;
   box-sizing: border-box;
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease;
 }
+
+.pill-nav.nav-hidden {
+  opacity: 0;
+  transform: translateY(-160%);
+  pointer-events: none;
+}
+
+.pill-nav.nav-blur {
+  background: rgba(12, 10, 7, 0.45);
+  backdrop-filter: blur(12px) saturate(140%);
+  border-radius: 999px;
+  padding: 5px 8px;
+}
+
 
 @media (max-width: 768px) {
   .pill-nav {
