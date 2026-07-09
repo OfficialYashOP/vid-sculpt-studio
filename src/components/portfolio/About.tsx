@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import ProfileCard from "@/components/ProfileCard";
 import portrait from "@/assets/yash-portrait.png.asset.json";
 
 const stats = [
@@ -13,14 +14,19 @@ export function About() {
     <section id="about" className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
       <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal className="relative mx-auto w-full max-w-sm">
-          <div className="absolute -inset-3 rounded-[2rem] bg-gold/20 blur-2xl" />
-          <img
-            src={portrait.url}
-            alt="Portrait of Yash Pandey"
-            loading="lazy"
-            width={800}
-            height={1008}
-            className="relative w-full rounded-[1.75rem] border border-gold/30 object-cover"
+          <ProfileCard
+            avatarUrl={portrait.url}
+            miniAvatarUrl={portrait.url}
+            name="Yash Pandey"
+            title="AI Video Creator & Editor"
+            handle="yash"
+            status="Available for work"
+            contactText="Contact"
+            behindGlowEnabled
+            innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+            onContactClick={() => {
+              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
           />
         </Reveal>
 
