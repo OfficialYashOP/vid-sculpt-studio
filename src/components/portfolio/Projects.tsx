@@ -411,29 +411,29 @@ function Card({ project }: { project: Project }) {
       )}
 
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-        <div className="mb-3 flex flex-wrap gap-2">
+        <div className="mb-3.5 flex flex-wrap gap-1.5">
           {project.tags.map((t) => (
             <span
               key={t}
-              className="rounded-full border border-gold/25 bg-background/50 px-2.5 py-1 text-[11px] font-medium tracking-wide text-gold backdrop-blur-sm"
+              className="rounded-full border border-gold/25 bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-gold backdrop-blur-sm"
             >
               {t}
             </span>
           ))}
         </div>
         <h3
-          className={`font-display leading-tight tracking-tight ${
+          className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
           }`}
         >
-          {project.title}
+          <span>{project.title}</span>
           {project.meta && (
-            <span className="ml-2 align-middle text-sm font-sans font-medium text-muted-foreground">
+            <span className="text-sm font-sans font-medium text-muted-foreground">
               · {project.meta}
             </span>
           )}
         </h3>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground/90">
+        <p className="mt-2.5 max-w-lg text-sm leading-relaxed text-muted-foreground/90">
           {project.hook}
         </p>
       </div>
