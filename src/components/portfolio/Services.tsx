@@ -67,7 +67,9 @@ export function Services() {
               <div className="mb-6 inline-flex rounded-xl bg-gold/12 p-3 text-gold ring-1 ring-inset ring-gold/15 transition-colors duration-500 group-hover:bg-gold group-hover:text-primary-foreground">
                 <s.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight">{s.title}</h3>
+              <h3 className="text-lg font-bold tracking-tight">
+                <BlurText text={s.title} animateBy="words" className="flex-wrap" />
+              </h3>
               <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground/90">{s.desc}</p>
             </SpotlightCard>
           </Reveal>

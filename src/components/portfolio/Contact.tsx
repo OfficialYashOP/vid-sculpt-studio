@@ -4,6 +4,7 @@ import StarBorder from "@/components/StarBorder";
 import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
 import { Reveal } from "./Reveal";
 
 const schema = z.object({
@@ -29,17 +30,32 @@ const contacts = [
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const result = schema.safeParse(form);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
       return;
     }
-    toast.success("Thanks! Your message is ready — I'll get back to you soon.");
-    setForm({ name: "", email: "", message: "" });
+    setSending(true);
+    try {
+      const { error } = await supabase.from("contact_messages").insert({
+        name: result.data.name,
+        email: result.data.email,
+        message: result.data.message,
+      });
+      if (error) throw error;
+      toast.success("Thanks! Your message has been sent — I'll get back to you soon.");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      toast.error("Something went wrong. Please try again or email me directly.");
+    } finally {
+      setSending(false);
+    }
   };
+
 
   return (
     <section id="contact" className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
@@ -119,9 +135,10 @@ export function Contact() {
             <StarBorder color="rgba(230, 179, 82, 0.95)" speed="4s" thickness={2} className="rounded-full">
               <button
                 type="submit"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold"
+                disabled={sending}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:glow-gold disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Send Message
+                {sending ? "Sending..." : "Send Message"}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </StarBorder>
