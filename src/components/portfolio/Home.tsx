@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Aurora from "@/components/Aurora";
 import BlurText from "@/components/BlurText";
 import SpotlightCard from "@/components/SpotlightCard";
+import StarBorder from "@/components/StarBorder";
 
 type CardItem = {
   title: string;
@@ -99,35 +100,42 @@ export function Home() {
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {cards.map((card, i) => {
               const inner = (
-                <SpotlightCard
-                  className="group flex h-full min-h-[320px] flex-col justify-between !bg-card/60 backdrop-blur-sm"
-                  spotlightColor="rgba(230, 179, 82, 0.18)"
+                <StarBorder
+                  color="rgba(230, 179, 82, 0.9)"
+                  speed="5s"
+                  thickness={2}
+                  className="h-full"
                 >
-                  <div>
-                    <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-gold">
-                      {card.icon}
+                  <SpotlightCard
+                    className="group flex h-full min-h-[320px] flex-col justify-between !bg-card/80 backdrop-blur-sm"
+                    spotlightColor="rgba(230, 179, 82, 0.18)"
+                  >
+                    <div>
+                      <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                        {card.icon}
+                      </div>
+                      <div className="mb-3 flex items-center gap-3">
+                        <h2 className="font-display text-3xl tracking-tight">{card.title}</h2>
+                        {card.comingSoon && (
+                          <span className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                            <Clock className="h-3 w-3" /> Soon
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{card.description}</p>
                     </div>
-                    <div className="mb-3 flex items-center gap-3">
-                      <h2 className="font-display text-3xl tracking-tight">{card.title}</h2>
-                      {card.comingSoon && (
-                        <span className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                          <Clock className="h-3 w-3" /> Soon
-                        </span>
+                    <div
+                      className={`mt-8 inline-flex items-center gap-2 text-sm font-semibold ${
+                        card.comingSoon ? "text-muted-foreground" : "text-gold"
+                      }`}
+                    >
+                      {card.cta}
+                      {!card.comingSoon && (
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       )}
                     </div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{card.description}</p>
-                  </div>
-                  <div
-                    className={`mt-8 inline-flex items-center gap-2 text-sm font-semibold ${
-                      card.comingSoon ? "text-muted-foreground" : "text-gold"
-                    }`}
-                  >
-                    {card.cta}
-                    {!card.comingSoon && (
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    )}
-                  </div>
-                </SpotlightCard>
+                  </SpotlightCard>
+                </StarBorder>
               );
 
               return (
