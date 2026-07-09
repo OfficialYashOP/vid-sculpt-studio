@@ -444,6 +444,7 @@ function Card({ project }: { project: Project }) {
         )}
       </AnimatePresence>
     </motion.article>
+    </StarBorder>
   );
 }
 
