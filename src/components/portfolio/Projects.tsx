@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import BlurText from "@/components/BlurText";
 import BorderGlow from "@/components/BorderGlow";
 import StarBorder from "@/components/StarBorder";
