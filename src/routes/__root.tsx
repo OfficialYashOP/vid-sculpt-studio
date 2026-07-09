@@ -78,25 +78,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Yash Pandey — AI Video Generalist" },
+      { title: "Yash Pandey — Portfolio" },
       {
         name: "description",
         content:
-          "Yash Pandey turns ideas into cinematic AI videos — ads, short films & UGC crafted with cutting-edge AI video tools. 7+ years of video creation.",
+          "Yash Pandey's portfolio hub — AI Video Creator, Software Developer and Cyber Security. Explore my work.",
       },
       { name: "author", content: "Yash Pandey" },
-      { property: "og:title", content: "Yash Pandey — AI Video Generalist" },
+      { property: "og:title", content: "Yash Pandey — Portfolio" },
       {
         property: "og:description",
         content:
-          "Cinematic AI-driven ads, short films & UGC content built with the latest AI video tools.",
+          "Yash Pandey's portfolio hub — AI Video Creator, Software Developer and Cyber Security. Explore my work.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Yash Pandey — Portfolio" },
+      { name: "twitter:description", content: "Yash Pandey's portfolio hub — AI Video Creator, Software Developer and Cyber Security. Explore my work." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/edb66ba0-e7c6-462f-a7bc-26d775f7693f" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/edb66ba0-e7c6-462f-a7bc-26d775f7693f" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: favicon, type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Portfolio hub — AI Video Creator, Software Developer and Cyber Security.",
+          "Yash Pandey's portfolio hub — AI Video Creator, Software Developer and Cyber Security. Explore my work.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
