@@ -132,20 +132,31 @@ function useNavHideWhilePlaying() {
   }, []);
 }
 
+function useLockBodyScroll() {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+}
+
 function VideoModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useNavHideWhilePlaying();
+  useLockBodyScroll();
   const videos = project.videos ?? [];
   const single = videos.length === 1;
   const [selected, setSelected] = useState<number | null>(single ? 0 : null);
   const active = selected !== null ? videos[selected] : null;
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/98 p-4 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-background/98 p-4 backdrop-blur-xl"
     >
       <button
         type="button"
