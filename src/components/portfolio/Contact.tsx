@@ -146,6 +146,7 @@ export function Contact() {
             </StarBorder>
 
           </form>
+          </BorderGlow>
         </Reveal>
       </div>
     </section>
