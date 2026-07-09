@@ -434,21 +434,30 @@ function Card({ project }: { project: Project }) {
       {project.privacy ? (
         <button
           type="button"
-          onClick={() => setShowPrivacy((v) => !v)}
+          onClick={() => {
+            playPop();
+            setShowPrivacy((v) => !v);
+          }}
           aria-label={`${project.title} — client privacy notice`}
           className="absolute inset-0 z-10"
         />
       ) : hasVideos ? (
         <button
           type="button"
-          onClick={() => setShowVideo(true)}
+          onClick={() => {
+            playPop();
+            setShowVideo(true);
+          }}
           aria-label={`Play ${project.title}`}
           className="absolute inset-0 z-10"
         />
       ) : youTubeId ? (
         <button
           type="button"
-          onClick={() => setShowYouTube(true)}
+          onClick={() => {
+            playPop();
+            setShowYouTube(true);
+          }}
           aria-label={`Watch ${project.title}`}
           className="absolute inset-0 z-10"
         />
