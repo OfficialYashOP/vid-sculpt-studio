@@ -130,7 +130,7 @@ export function Skills() {
                     )}
                   </div>
                 </div>
-              </StarBorder>
+              </BorderGlow>
             </Reveal>
           ))}
         </div>
