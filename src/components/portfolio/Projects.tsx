@@ -307,9 +307,14 @@ function Card({ project }: { project: Project }) {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showYouTube, setShowYouTube] = useState(false);
+  const [showAllTags, setShowAllTags] = useState(false);
   const hasVideos = !!project.videos?.length;
   const youTubeId = project.link ? getYouTubeId(project.link) : null;
   const cardRef = useRef<HTMLElement>(null);
+
+  const MAX_TAGS = project.featured ? 4 : 2;
+  const visibleTags = showAllTags ? project.tags : project.tags.slice(0, MAX_TAGS);
+  const hiddenCount = project.tags.length - visibleTags.length;
 
   useEffect(() => {
     if (!showPrivacy) return;
