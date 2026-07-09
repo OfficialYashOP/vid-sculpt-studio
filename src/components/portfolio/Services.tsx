@@ -55,7 +55,9 @@ export function Services() {
       </Reveal>
       <Reveal delay={1}>
         <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          <BlurText text="Services built for the new creative pipeline" animateBy="words" className="flex-wrap" />
+          <GradientText colors={["#e6b352", "#f4b8d0", "#8fd0ff", "#e6b352"]} animationSpeed={6} className="!max-w-full [&>.text-content]:whitespace-normal">
+            Services built for the new creative pipeline
+          </GradientText>
         </h2>
       </Reveal>
 
