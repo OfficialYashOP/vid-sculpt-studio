@@ -1,6 +1,6 @@
 import { Reveal } from "./Reveal";
 import BlurText from "@/components/BlurText";
-import StarBorder from "@/components/StarBorder";
+import BorderGlow from "@/components/BorderGlow";
 
 type Item = { name: string; url?: string };
 
