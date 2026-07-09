@@ -175,11 +175,18 @@ export default function Aurora(props: AuroraProps) {
     const mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas);
 
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
     let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
+      // Skip GPU work while the tab is hidden to save battery/CPU.
+      if (typeof document !== "undefined" && document.hidden) return;
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
-      program!.uniforms.uTime.value = time * speed * 0.1;
+      const effSpeed = reduceMotion ? 0 : speed;
+      program!.uniforms.uTime.value = time * effSpeed * 0.1;
       program!.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
       program!.uniforms.uBlend.value = propsRef.current.blend ?? blend;
       const stops = propsRef.current.colorStops ?? colorStops;
