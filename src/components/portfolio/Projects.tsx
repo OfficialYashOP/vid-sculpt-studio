@@ -412,7 +412,15 @@ function Card({ project }: { project: Project }) {
         {/* subtle top-right scrim just to keep the play button legible on bright frames */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-bl from-background/40 via-transparent to-transparent" />
 
-        <div className="group/play absolute right-3 top-3 z-30 transition-opacity duration-300 sm:right-4 sm:top-4">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            activate();
+          }}
+          aria-label={project.privacy ? `${project.title} — client privacy notice` : `Play ${project.title}`}
+          className="group/play absolute right-3 top-3 z-30 transition-opacity duration-300 sm:right-4 sm:top-4"
+        >
           <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover/play:bg-gold group-hover/play:text-primary-foreground group-hover/play:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover/play:ring-gold group-active/play:scale-90 motion-reduce:transition-none motion-reduce:group-active/play:scale-100 sm:h-12 sm:w-12">
             {/* pulsing halo — only on direct play-button hover, disabled for reduced motion */}
             {!project.privacy && (
@@ -424,7 +432,7 @@ function Card({ project }: { project: Project }) {
               <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover/play:scale-110 motion-reduce:transition-none motion-reduce:group-hover/play:scale-100 sm:h-6 sm:w-6" fill="currentColor" />
             )}
           </span>
-        </div>
+        </button>
 
         {project.privacy && showPrivacy && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/85 p-6 text-center backdrop-blur-sm">
