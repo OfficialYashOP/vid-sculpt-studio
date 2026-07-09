@@ -102,6 +102,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "preconnect", href: "https://storage.googleapis.com", crossOrigin: "anonymous" },
+      { rel: "dns-prefetch", href: "https://storage.googleapis.com" },
+      { rel: "dns-prefetch", href: "https://www.youtube.com" },
+      { rel: "dns-prefetch", href: "https://i.ytimg.com" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap",
