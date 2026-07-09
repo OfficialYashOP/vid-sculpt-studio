@@ -186,7 +186,7 @@ export default function Aurora(props: AuroraProps) {
       if (typeof document !== "undefined" && document.hidden) return;
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       const effSpeed = reduceMotion ? 0 : speed;
-      program!.uniforms.uTime.value = time * speed * 0.1;
+      program!.uniforms.uTime.value = time * effSpeed * 0.1;
       program!.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
       program!.uniforms.uBlend.value = propsRef.current.blend ?? blend;
       const stops = propsRef.current.colorStops ?? colorStops;
