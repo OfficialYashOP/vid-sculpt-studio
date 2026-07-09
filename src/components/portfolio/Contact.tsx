@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import BlurText from "@/components/BlurText";
 import { Mail, Phone, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -49,7 +50,8 @@ export function Contact() {
       </Reveal>
       <Reveal delay={1}>
         <h2 className="max-w-3xl font-display text-6xl leading-[0.92] tracking-tight sm:text-7xl">
-          Let's create something <span className="text-gradient-gold">cinematic</span> together
+          <BlurText text="Let's create something" animateBy="words" className="flex-wrap" />
+          <BlurText text="cinematic together" animateBy="words" className="flex-wrap text-gradient-gold" />
         </h2>
       </Reveal>
 

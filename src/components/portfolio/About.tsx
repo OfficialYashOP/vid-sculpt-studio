@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import BlurText from "@/components/BlurText";
 import ProfileCard from "@/components/ProfileCard";
 import portrait from "@/assets/yash-profile.png.asset.json";
 
@@ -19,7 +20,7 @@ export function About() {
             name="Yash Pandey"
             title="AI Video Creator & Editor"
             showUserInfo={false}
-            behindGlowEnabled
+            behindGlowEnabled={false}
             innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
           />
         </Reveal>
@@ -32,7 +33,7 @@ export function About() {
           </Reveal>
           <Reveal delay={1}>
             <h2 className="max-w-xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-              A storyteller wired for the AI era
+              <BlurText text="A storyteller wired for the AI era" animateBy="words" className="flex-wrap" />
             </h2>
           </Reveal>
           <Reveal delay={2}>

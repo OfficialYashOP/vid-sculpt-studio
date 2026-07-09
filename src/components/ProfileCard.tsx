@@ -336,8 +336,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       <section ref={shellRef} className="pc-card-shell">
         <div className="pc-card">
           <div className="pc-inside" />
-          <div className="pc-shine" />
-          <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
             <img
               className="avatar"

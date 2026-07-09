@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import BlurText from "@/components/BlurText";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
@@ -425,7 +426,7 @@ export function Projects() {
       </Reveal>
       <Reveal delay={1}>
         <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          Selected AI video projects
+          <BlurText text="Selected AI video projects" animateBy="words" className="flex-wrap" />
         </h2>
       </Reveal>
 

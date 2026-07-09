@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import BlurText from "@/components/BlurText";
 
 const groups = [
   {
@@ -34,7 +35,7 @@ export function Skills() {
         </Reveal>
         <Reveal delay={1}>
           <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-            The stack behind the craft
+            <BlurText text="The stack behind the craft" animateBy="words" className="flex-wrap" />
           </h2>
         </Reveal>
 

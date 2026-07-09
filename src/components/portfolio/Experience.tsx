@@ -1,4 +1,5 @@
 import { GraduationCap } from "lucide-react";
+import BlurText from "@/components/BlurText";
 import { Reveal } from "./Reveal";
 
 const timeline = [
@@ -42,7 +43,7 @@ export function Experience() {
       </Reveal>
       <Reveal delay={1}>
         <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          The journey so far
+          <BlurText text="The journey so far" animateBy="words" className="flex-wrap" />
         </h2>
       </Reveal>
 
