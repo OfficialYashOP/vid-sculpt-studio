@@ -97,37 +97,42 @@ export function Skills() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={i}>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                {g.title}
-              </h3>
-              <div className="flex flex-wrap gap-2.5">
-                {g.items.map((item) =>
-                  item.url ? (
-                    <a
-                      key={item.name}
-                      href={item.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
-                    <span
-                      key={item.name}
-                      className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
-                    >
-                      {item.name}
-                    </span>
-                  )
-                )}
-              </div>
+              <StarBorder color="rgba(230, 179, 82, 0.7)" speed="9s" thickness={1.5} className="h-full">
+                <div className="h-full rounded-[18px] bg-card/70 p-6 backdrop-blur-sm">
+                  <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-gold/80">
+                    {g.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2.5">
+                    {g.items.map((item) =>
+                      item.url ? (
+                        <a
+                          key={item.name}
+                          href={item.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
+                        >
+                          {item.name}
+                        </a>
+                      ) : (
+                        <span
+                          key={item.name}
+                          className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-gold hover:text-gold"
+                        >
+                          {item.name}
+                        </span>
+                      )
+                    )}
+                  </div>
+                </div>
+              </StarBorder>
             </Reveal>
           ))}
         </div>
+
       </div>
     </section>
   );
