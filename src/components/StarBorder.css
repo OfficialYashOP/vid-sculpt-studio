@@ -35,6 +35,14 @@
   z-index: 1;
   border-radius: 18px;
   height: 100%;
+  overflow: hidden;
+}
+
+/* Freeze the animated border while a video modal is open. */
+.star-border-container.star-paused .border-gradient-bottom,
+.star-border-container.star-paused .border-gradient-top {
+  animation-play-state: paused;
+  opacity: 0.25;
 }
 
 @keyframes star-movement-bottom {
