@@ -1,4 +1,5 @@
 import BlurText from "@/components/BlurText";
+import GradientText from "@/components/GradientText";
 import SpotlightCard from "@/components/SpotlightCard";
 import BorderGlow from "@/components/BorderGlow";
 import {
