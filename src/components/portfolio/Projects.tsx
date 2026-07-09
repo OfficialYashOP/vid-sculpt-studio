@@ -433,7 +433,7 @@ function Card({ project }: { project: Project }) {
         )
       )}
 
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background to-background/70 p-5 sm:p-6">
+      <div className="relative z-10 p-5 sm:p-6">
         <h3
           className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
