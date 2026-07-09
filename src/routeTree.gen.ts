@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AIRouteImport } from './routes/AI'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
+  id: '/api/public/contact',
+  path: '/api/public/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/AI': typeof AIRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/AI': typeof AIRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
@@ -53,20 +61,38 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/AI': typeof AIRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/AI' | '/sitemap.xml' | '/lovable/email/queue/process'
+  fullPaths:
+    | '/'
+    | '/AI'
+    | '/sitemap.xml'
+    | '/api/public/contact'
+    | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/AI' | '/sitemap.xml' | '/lovable/email/queue/process'
-  id: '__root__' | '/' | '/AI' | '/sitemap.xml' | '/lovable/email/queue/process'
+  to:
+    | '/'
+    | '/AI'
+    | '/sitemap.xml'
+    | '/api/public/contact'
+    | '/lovable/email/queue/process'
+  id:
+    | '__root__'
+    | '/'
+    | '/AI'
+    | '/sitemap.xml'
+    | '/api/public/contact'
+    | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AIRoute: typeof AIRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicContactRoute: typeof ApiPublicContactRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
@@ -93,6 +119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/contact': {
+      id: '/api/public/contact'
+      path: '/api/public/contact'
+      fullPath: '/api/public/contact'
+      preLoaderRoute: typeof ApiPublicContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
       path: '/lovable/email/queue/process'
@@ -107,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AIRoute: AIRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicContactRoute: ApiPublicContactRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
