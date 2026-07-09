@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import BlurText from "@/components/BlurText";
+import StarBorder from "@/components/StarBorder";
 import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
