@@ -12,7 +12,7 @@ export function Hero() {
     <section id="home" className="grain relative flex min-h-svh items-center overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <img
-          src={heroBg}
+          src={heroBg.url}
           alt=""
           aria-hidden
           width={1920}

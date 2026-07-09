@@ -103,7 +103,7 @@ const projects: Project[] = [
   {
     title: "AI Influencer Creation",
     category: "AI Influencers",
-    image: influencer,
+    image: influencer.url,
     hook: "Fully AI-generated virtual influencer personas with consistent character design.",
     tags: [
       "Character Consistency",
