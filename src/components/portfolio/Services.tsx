@@ -90,7 +90,9 @@ export function Services() {
                 <s.icon className="h-6 w-6" />
               </div>
               <h3 className="relative text-lg font-bold tracking-tight transition-colors duration-500 group-hover:text-gold">
-                <BlurText text={s.title} animateBy="words" className="flex-wrap" />
+                <GradientText colors={["#e6b352", "#f4b8d0", "#8fd0ff", "#e6b352"]} animationSpeed={5} className="!max-w-full [&>.text-content]:whitespace-normal">
+                  {s.title}
+                </GradientText>
               </h3>
               <p className="relative mt-2.5 text-sm leading-relaxed text-muted-foreground/90">{s.desc}</p>
 
