@@ -367,23 +367,22 @@ function Card({ project }: { project: Project }) {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="group relative h-full overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
     >
-      <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
+      <div className={`relative w-full overflow-hidden rounded-t-[20px] bg-muted/20 ${project.featured ? "aspect-video p-2 sm:p-3" : "aspect-[3/4] p-3 sm:p-4"}`}>
         <img
           src={project.image}
           alt={project.title}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="h-full w-full rounded-lg object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/70 to-transparent" />
 
-        <div className="absolute right-3 top-3 z-30 opacity-90 transition-all duration-300 ease-out group-hover:opacity-100 sm:right-4 sm:top-4">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-active:scale-95 sm:h-12 sm:w-12">
+        <div className="absolute right-3 top-3 z-30 pointer-events-none sm:right-4 sm:top-4">
+          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg backdrop-blur-sm transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-gold group-hover:shadow-xl group-hover:shadow-gold/30 group-active:scale-95 sm:h-12 sm:w-12">
+            <span className="absolute -inset-1 rounded-full border border-gold opacity-0 transition-all duration-300 group-hover:-inset-2 group-hover:border-gold/50 group-hover:opacity-100 group-hover:animate-pulse" />
             {project.privacy ? (
-              <Lock className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Lock className="relative h-5 w-5 sm:h-6 sm:w-6" />
             ) : (
-              <Play className="h-5 w-5 translate-x-0.5 sm:h-6 sm:w-6" fill="currentColor" />
+              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover:translate-x-1 sm:h-6 sm:w-6" fill="currentColor" />
             )}
           </span>
         </div>
@@ -434,7 +433,7 @@ function Card({ project }: { project: Project }) {
         )
       )}
 
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background to-background/70 p-5 sm:p-6">
+      <div className="relative z-10 p-5 sm:p-6">
         <h3
           className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
             project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
