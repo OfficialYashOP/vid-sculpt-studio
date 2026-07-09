@@ -24,6 +24,32 @@ import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
 import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
 import ranaSangaVideo from "@/assets/rana-sanga.mp4.asset.json";
 
+/** Tiny, dependency-free "pop" click sound via the Web Audio API. */
+let _audioCtx: AudioContext | null = null;
+function playPop() {
+  try {
+    const AC = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AC) return;
+    _audioCtx = _audioCtx || new AC();
+    const ctx = _audioCtx;
+    if (ctx.state === "suspended") ctx.resume();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(420, now);
+    osc.frequency.exponentialRampToValueAtTime(720, now + 0.09);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.24);
+  } catch {
+    /* no-op */
+  }
+}
+
 type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influencers";
 
 interface VideoItem {
