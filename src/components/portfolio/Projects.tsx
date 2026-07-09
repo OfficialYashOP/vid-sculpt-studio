@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import BlurText from "@/components/BlurText";
 import BorderGlow from "@/components/BorderGlow";
 import StarBorder from "@/components/StarBorder";
@@ -131,20 +132,31 @@ function useNavHideWhilePlaying() {
   }, []);
 }
 
+function useLockBodyScroll() {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+}
+
 function VideoModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useNavHideWhilePlaying();
+  useLockBodyScroll();
   const videos = project.videos ?? [];
   const single = videos.length === 1;
   const [selected, setSelected] = useState<number | null>(single ? 0 : null);
   const active = selected !== null ? videos[selected] : null;
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/98 p-4 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-background/98 p-4 backdrop-blur-xl"
     >
       <button
         type="button"
@@ -261,7 +273,8 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
         )}
       </div>
 
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 
@@ -272,13 +285,14 @@ function getYouTubeId(url: string): string | null {
 
 function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
   useNavHideWhilePlaying();
-  return (
+  useLockBodyScroll();
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-background/98 p-4 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-background/98 p-4 backdrop-blur-xl"
     >
       <button
         type="button"
@@ -299,7 +313,8 @@ function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
           />
         </div>
       </div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 
@@ -359,12 +374,12 @@ function Card({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/90 sm:via-background/85 sm:to-background/30" />
         <div className="absolute inset-x-0 bottom-0 h-[92%] bg-gradient-to-t from-background via-background/90 to-transparent" />
 
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:opacity-100">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 scale-90 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100 sm:opacity-0 sm:scale-75 sm:group-hover:opacity-100 sm:group-hover:scale-100">
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/90 text-primary-foreground shadow-lg transition-transform duration-300 group-hover:scale-110 group-active:scale-95 sm:h-16 sm:w-16">
             {project.privacy ? (
-              <Lock className="h-6 w-6" />
+              <Lock className="h-5 w-5 sm:h-6 sm:w-6" />
             ) : (
-              <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
+              <Play className="h-5 w-5 translate-x-0.5 sm:h-6 sm:w-6" fill="currentColor" />
             )}
           </span>
         </div>
