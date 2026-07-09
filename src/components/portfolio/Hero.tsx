@@ -17,15 +17,15 @@ export function Hero() {
           aria-hidden
           width={1920}
           height={1280}
-          className="h-full w-full object-cover opacity-70"
+          className="h-full w-full object-cover opacity-40"
         />
         {mounted && (
-          <div className="absolute inset-0 opacity-60 mix-blend-screen">
-            <Aurora colorStops={["#c9a24a", "#B497CF", "#5227FF"]} blend={0.5} amplitude={1.0} speed={0.5} />
+          <div className="absolute inset-0 opacity-90">
+            <Aurora colorStops={["#c9a24a", "#B497CF", "#5227FF"]} blend={0.5} amplitude={1.2} speed={0.6} />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,transparent,var(--background)_75%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,transparent,var(--background)_90%)]" />
       </div>
 
       <div className="mx-auto w-full max-w-7xl px-5 pt-28 sm:px-8">
