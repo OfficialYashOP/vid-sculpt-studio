@@ -100,6 +100,7 @@ export function Contact() {
         </div>
 
         <Reveal delay={1} className="min-w-0">
+          <BorderGlow borderRadius={16} glowRadius={30} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}>
           <form onSubmit={onSubmit} className="glass space-y-4 rounded-2xl p-6 sm:p-8">
             <div>
               <label className="mb-1.5 block text-sm font-medium">Name</label>
