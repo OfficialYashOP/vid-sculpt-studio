@@ -1,3 +1,4 @@
+import BlurText from "@/components/BlurText";
 import {
   Clapperboard,
   Megaphone,
@@ -51,7 +52,7 @@ export function Services() {
       </Reveal>
       <Reveal delay={1}>
         <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          Services built for the new creative pipeline
+          <BlurText text="Services built for the new creative pipeline" animateBy="words" className="flex-wrap" />
         </h2>
       </Reveal>
 
