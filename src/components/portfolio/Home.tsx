@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Aurora from "@/components/Aurora";
 import BlurText from "@/components/BlurText";
 import SpotlightCard from "@/components/SpotlightCard";
+import StarBorder from "@/components/StarBorder";
 
 type CardItem = {
   title: string;
