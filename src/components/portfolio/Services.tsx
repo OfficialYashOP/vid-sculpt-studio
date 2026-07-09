@@ -94,6 +94,7 @@ export function Services() {
               {/* bottom accent line */}
               <div className="relative mt-6 h-px w-10 bg-gold/30 transition-all duration-500 group-hover:w-16 group-hover:bg-gold" />
             </SpotlightCard>
+            </BorderGlow>
           </Reveal>
         ))}
       </div>
