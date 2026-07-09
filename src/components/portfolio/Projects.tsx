@@ -351,7 +351,7 @@ function Card({ project }: { project: Project }) {
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/75 sm:via-background/85 sm:to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/90 sm:via-background/85 sm:to-background/30" />
         <div className="absolute inset-x-0 bottom-0 h-[92%] bg-gradient-to-t from-background via-background/90 to-transparent" />
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:opacity-100">
