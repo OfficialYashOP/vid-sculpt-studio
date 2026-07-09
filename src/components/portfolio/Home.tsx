@@ -117,7 +117,9 @@ export function Home() {
                         {card.icon}
                       </div>
                       <div className="mb-3 flex flex-wrap items-center gap-3">
-                        <h2 className="font-display text-3xl tracking-tight">{card.title}</h2>
+                        <h2 className="font-display text-3xl tracking-tight">
+                          <BlurText text={card.title} animateBy="words" className="flex-wrap" />
+                        </h2>
                         {card.comingSoon && (
                           <span className="inline-flex items-center gap-1 rounded-full border border-gold/20 bg-gold/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-gold/80">
                             <Clock className="h-3 w-3" /> Soon
