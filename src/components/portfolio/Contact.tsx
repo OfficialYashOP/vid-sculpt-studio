@@ -4,6 +4,7 @@ import StarBorder from "@/components/StarBorder";
 import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
 import { Reveal } from "./Reveal";
 
 const schema = z.object({
