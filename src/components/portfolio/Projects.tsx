@@ -144,7 +144,7 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/98 p-4 backdrop-blur-xl"
     >
       <button
         type="button"
