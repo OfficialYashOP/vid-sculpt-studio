@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Clock, Film, Code2, ShieldCheck } from "lucide-react";
-import { useEffect, useState } from "react";
-import Aurora from "@/components/Aurora";
+import { lazy, Suspense, useEffect, useState } from "react";
+const Aurora = lazy(() => import("@/components/Aurora"));
 import BlurText from "@/components/BlurText";
 import SpotlightCard from "@/components/SpotlightCard";
 import StarBorder from "@/components/StarBorder";
