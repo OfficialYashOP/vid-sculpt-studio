@@ -359,6 +359,14 @@ function Card({ project }: { project: Project }) {
   const visibleTags = showAllTags ? project.tags : project.tags.slice(0, MAX_TAGS);
   const hiddenCount = project.tags.length - visibleTags.length;
 
+  const activate = () => {
+    playPop();
+    if (project.privacy) setShowPrivacy((v) => !v);
+    else if (hasVideos) setShowVideo(true);
+    else if (youTubeId) setShowYouTube(true);
+    else if (project.link) window.open(project.link, "_blank", "noreferrer");
+  };
+
   useEffect(() => {
     if (!showPrivacy) return;
     const handleOutside = (e: MouseEvent) => {
