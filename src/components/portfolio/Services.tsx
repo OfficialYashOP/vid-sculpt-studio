@@ -1,5 +1,6 @@
 import BlurText from "@/components/BlurText";
 import SpotlightCard from "@/components/SpotlightCard";
+import BorderGlow from "@/components/BorderGlow";
 import {
   Clapperboard,
   Megaphone,
