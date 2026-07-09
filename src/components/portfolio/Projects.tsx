@@ -273,7 +273,8 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
         )}
       </div>
 
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 
