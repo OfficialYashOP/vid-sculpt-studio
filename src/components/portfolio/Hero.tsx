@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { useEffect, useState } from "react";
-import heroBg from "@/assets/hero-bg.jpg.asset.json";
 import Aurora from "@/components/Aurora";
 
 export function Hero() {
@@ -9,26 +8,18 @@ export function Hero() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <section id="home" className="grain relative flex min-h-svh items-center overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <img
-          src={heroBg.url}
-          alt=""
-          aria-hidden
-          width={1920}
-          height={1280}
-          className="h-full w-full object-cover opacity-40"
-        />
+    <section id="home" className="grain relative isolate flex min-h-svh items-center overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         {mounted && (
-          <div className="absolute inset-0 opacity-90">
-            <Aurora colorStops={["#c9a24a", "#B497CF", "#5227FF"]} blend={0.5} amplitude={1.2} speed={0.6} />
+          <div className="absolute inset-0 opacity-100">
+            <Aurora colorStops={["#7cff67", "#B497CF", "#5227FF"]} blend={0.35} amplitude={2.2} speed={0.7} />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,transparent,var(--background)_90%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/10 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/10 to-background/0" />
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-5 pt-28 sm:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pt-28 sm:px-8">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
