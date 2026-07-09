@@ -121,7 +121,17 @@ const projects: Project[] = [
 
 const filters = ["All", "Short Film", "Product Ads", "UGC", "Animation", "AI Influencers"] as const;
 
+function useNavHideWhilePlaying() {
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("portfolio:video", { detail: true }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("portfolio:video", { detail: false }));
+    };
+  }, []);
+}
+
 function VideoModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  useNavHideWhilePlaying();
   const videos = project.videos ?? [];
   const single = videos.length === 1;
   const [selected, setSelected] = useState<number | null>(single ? 0 : null);
