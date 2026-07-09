@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import BlurText from "@/components/BlurText";
-import { Mail, Phone, Linkedin, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Reveal } from "./Reveal";
@@ -15,10 +15,9 @@ const contacts = [
   {
     icon: Mail,
     label: "Email",
-    value: "pandey97828@gmail.com",
-    href: "mailto:pandey97828@gmail.com",
+    value: "officialyashop007@gmail.com",
+    href: "mailto:officialyashop007@gmail.com",
   },
-  { icon: Phone, label: "Phone", value: "+91 94615 71272", href: "tel:+919461571272" },
   {
     icon: Linkedin,
     label: "LinkedIn",
