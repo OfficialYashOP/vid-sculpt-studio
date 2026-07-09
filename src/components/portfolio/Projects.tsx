@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BlurText from "@/components/BlurText";
+import BorderGlow from "@/components/BorderGlow";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
@@ -149,41 +150,59 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
       >
         {active && active.src ? (
           <>
-            <video
-              key={active.src}
-              src={active.src}
-              poster={active.poster}
-              controls
-              autoPlay
-              playsInline
-              preload="auto"
-              className="mx-auto max-h-[70vh] w-auto max-w-full rounded-xl border border-border shadow-2xl"
-            />
+            <BorderGlow
+              active
+              borderRadius={14}
+              glowRadius={34}
+              glowColor="40 90 62"
+              backgroundColor="#0c0a07"
+              colors={["#e6b352", "#f472b6", "#38bdf8"]}
+              className="mx-auto w-fit"
+            >
+              <video
+                key={active.src}
+                src={active.src}
+                poster={active.poster}
+                controls
+                autoPlay
+                playsInline
+                preload="auto"
+                className="mx-auto max-h-[70vh] w-auto max-w-full rounded-[13px]"
+              />
+            </BorderGlow>
             {videos.length > 1 && (
-              <div className="mx-auto mt-4 flex max-w-full flex-wrap justify-center gap-3">
+              <div className="mx-auto mt-6 flex max-w-full flex-wrap justify-center gap-4">
                 {videos.map((v, i) => {
                   const isActive = selected === i;
                   return (
-                    <button
+                    <BorderGlow
                       key={v.label}
-                      type="button"
-                      onClick={() => setSelected(i)}
-                      className={`group/thumb relative w-40 shrink-0 overflow-hidden rounded-lg border text-left transition-colors ${
-                        isActive ? "border-gold" : "border-border hover:border-gold/50"
-                      }`}
+                      active={isActive}
+                      borderRadius={10}
+                      glowRadius={16}
+                      glowColor="40 90 62"
+                      backgroundColor="#0c0a07"
+                      colors={["#e6b352", "#f472b6", "#38bdf8"]}
+                      className="w-40 shrink-0"
                     >
-                      <img src={v.poster} alt={v.label} className="aspect-video w-full object-cover" />
-                      {!isActive && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-background/40 opacity-0 transition-opacity group-hover/thumb:opacity-100">
-                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/90 text-primary-foreground">
-                            <Play className="h-4 w-4 translate-x-0.5" fill="currentColor" />
-                          </span>
-                        </div>
-                      )}
-                      <span className="absolute bottom-1.5 left-1.5 rounded-md bg-background/70 px-1.5 py-0.5 text-[11px] font-medium text-foreground">
-                        {v.label}
-                      </span>
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelected(i)}
+                        className="group/thumb relative block w-full overflow-hidden rounded-[9px] text-left"
+                      >
+                        <img src={v.poster} alt={v.label} className="aspect-video w-full object-cover" />
+                        {!isActive && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-background/40 opacity-0 transition-opacity group-hover/thumb:opacity-100">
+                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/90 text-primary-foreground">
+                              <Play className="h-4 w-4 translate-x-0.5" fill="currentColor" />
+                            </span>
+                          </div>
+                        )}
+                        <span className="absolute bottom-1.5 left-1.5 rounded-md bg-background/70 px-1.5 py-0.5 text-[11px] font-medium text-foreground">
+                          {v.label}
+                        </span>
+                      </button>
+                    </BorderGlow>
                   );
                 })}
               </div>

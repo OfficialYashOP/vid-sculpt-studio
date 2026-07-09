@@ -1,4 +1,5 @@
 import BlurText from "@/components/BlurText";
+import SpotlightCard from "@/components/SpotlightCard";
 import {
   Clapperboard,
   Megaphone,
@@ -59,13 +60,16 @@ export function Services() {
       <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s, i) => (
           <Reveal key={s.title} delay={i} className="h-full">
-            <div className="group glass h-full rounded-2xl p-7 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40">
+            <SpotlightCard
+              spotlightColor="rgba(230, 179, 82, 0.18)"
+              className="group glass h-full !rounded-2xl p-7 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40"
+            >
               <div className="mb-6 inline-flex rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-500 group-hover:bg-gold group-hover:text-primary-foreground">
                 <s.icon className="h-6 w-6" />
               </div>
               <h3 className="text-lg font-bold">{s.title}</h3>
               <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-            </div>
+            </SpotlightCard>
           </Reveal>
         ))}
       </div>
