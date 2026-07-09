@@ -33,7 +33,7 @@
 .star-border-container .inner-content {
   position: relative;
   z-index: 1;
-  border-radius: 18px;
+  border-radius: inherit;
   height: 100%;
   overflow: hidden;
 }
