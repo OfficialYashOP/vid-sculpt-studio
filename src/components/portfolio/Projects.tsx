@@ -391,7 +391,7 @@ function Card({ project }: { project: Project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative h-full overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
     >
       <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
         <img
@@ -399,21 +399,21 @@ function Card({ project }: { project: Project }) {
           alt={project.title}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/70 to-transparent" />
+        {/* subtle top-right scrim just to keep the play button legible on bright frames */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-bl from-background/40 via-transparent to-transparent" />
 
-        <div className="absolute right-3 top-3 z-30 opacity-90 transition-all duration-300 ease-out group-hover:opacity-100 sm:right-4 sm:top-4">
-          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover:bg-gold group-hover:text-primary-foreground group-hover:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover:ring-gold group-active:scale-90 sm:h-12 sm:w-12">
-            {/* pulsing halo on hover */}
+        <div className="group/play absolute right-3 top-3 z-30 transition-opacity duration-300 sm:right-4 sm:top-4">
+          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover/play:bg-gold group-hover/play:text-primary-foreground group-hover/play:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover/play:ring-gold group-active/play:scale-90 motion-reduce:transition-none motion-reduce:group-active/play:scale-100 sm:h-12 sm:w-12">
+            {/* pulsing halo — only on direct play-button hover, disabled for reduced motion */}
             {!project.privacy && (
-              <span className="pointer-events-none absolute inset-0 rounded-full bg-gold/40 opacity-0 transition-opacity duration-300 group-hover:animate-ping group-hover:opacity-70" />
+              <span className="pointer-events-none absolute inset-0 rounded-full bg-gold/40 opacity-0 transition-opacity duration-300 group-hover/play:opacity-70 group-hover/play:motion-safe:animate-ping" />
             )}
             {project.privacy ? (
               <Lock className="relative h-5 w-5 sm:h-6 sm:w-6" />
             ) : (
-              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6" fill="currentColor" />
+              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover/play:scale-110 motion-reduce:transition-none motion-reduce:group-hover/play:scale-100 sm:h-6 sm:w-6" fill="currentColor" />
             )}
           </span>
         </div>
