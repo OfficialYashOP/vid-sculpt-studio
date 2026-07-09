@@ -54,7 +54,9 @@ export function Experience() {
               <div className="relative">
                 <span className="absolute -left-[2.6rem] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gold ring-4 ring-background" />
                 <p className="text-sm font-medium text-gold">{t.period}</p>
-                <h3 className="mt-1 text-2xl font-bold">{t.role}</h3>
+                <h3 className="mt-1 text-2xl font-bold">
+                  <BlurText text={t.role} animateBy="words" className="flex-wrap" />
+                </h3>
                 <p className="text-muted-foreground">{t.org}</p>
                 <ul className="mt-4 space-y-2.5">
                   {t.points.map((p) => (
