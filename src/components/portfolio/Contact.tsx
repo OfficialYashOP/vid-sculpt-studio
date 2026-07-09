@@ -55,8 +55,8 @@ export function Contact() {
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
-        <div className="space-y-4">
+      <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="min-w-0 space-y-4">
           {contacts.map((c, i) => (
             <Reveal key={c.label} delay={i}>
               <StarBorder color="rgba(230, 179, 82, 0.7)" speed="7s" thickness={1.5}>
@@ -66,14 +66,14 @@ export function Contact() {
                   rel="noreferrer"
                   className="group flex items-center gap-4 rounded-[18px] bg-card/70 p-5 transition-colors duration-300 hover:bg-card"
                 >
-                  <span className="inline-flex rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
+                  <span className="inline-flex shrink-0 rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
                     <c.icon className="h-5 w-5" />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs uppercase tracking-widest text-muted-foreground">
                       {c.label}
                     </p>
-                    <p className="font-medium">{c.value}</p>
+                    <p className="font-medium [overflow-wrap:anywhere]">{c.value}</p>
                   </div>
                 </a>
               </StarBorder>
@@ -82,7 +82,7 @@ export function Contact() {
           ))}
         </div>
 
-        <Reveal delay={1}>
+        <Reveal delay={1} className="min-w-0">
           <form onSubmit={onSubmit} className="glass space-y-4 rounded-2xl p-6 sm:p-8">
             <div>
               <label className="mb-1.5 block text-sm font-medium">Name</label>
