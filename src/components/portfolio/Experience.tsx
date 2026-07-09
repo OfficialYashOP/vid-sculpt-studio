@@ -1,5 +1,6 @@
 import { GraduationCap } from "lucide-react";
 import BlurText from "@/components/BlurText";
+import BorderGlow from "@/components/BorderGlow";
 import { Reveal } from "./Reveal";
 
 const timeline = [
