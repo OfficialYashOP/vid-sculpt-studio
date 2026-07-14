@@ -22,6 +22,10 @@ import pandaForestVideo from "@/assets/panda-forest.mp4.asset.json";
 import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
 import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
 import ranaSangaVideo from "@/assets/rana-sanga.mp4.asset.json";
+import pinkPhoolVideo from "@/assets/pink-phool.mp4.asset.json";
+import pinkPhoolPoster from "@/assets/pink-phool-poster.jpg.asset.json";
+import fastFiredVideo from "@/assets/fastfired-teaser.mp4.asset.json";
+import fastFiredPoster from "@/assets/fastfired-poster.jpg.asset.json";
 
 const SERIF = '"Fraunces", "Times New Roman", serif';
 const MONO = '"JetBrains Mono", ui-monospace, monospace';
