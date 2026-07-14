@@ -5,12 +5,12 @@ import BorderGlow from "@/components/BorderGlow";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, Lock, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
-import seedance2 from "@/assets/seedance2-thumb.jpeg.asset.json";
-import haircare from "@/assets/haircare-thumb.png.asset.json";
+import seedance2 from "@/assets/seedance2-thumb.webp.asset.json";
+import haircare from "@/assets/haircare-thumb.webp.asset.json";
 import ranaSanga from "@/assets/rana-sanga-thumb.webp.asset.json";
 import influencer from "@/assets/proj-influencer.jpg.asset.json";
 import ugcVideo from "@/assets/ugc-example.mp4.asset.json";
-import ugcPoster from "@/assets/ugc-girl-thumbnail.png.asset.json";
+import ugcPoster from "@/assets/ugc-girl-thumb.webp.asset.json";
 import coffeeVideo from "@/assets/coffee-final-film.mp4.asset.json";
 import coffeePoster from "@/assets/coffee-poster.jpg.asset.json";
 import haircareVideo1 from "@/assets/haircare-ad-1.mp4.asset.json";
@@ -418,7 +418,10 @@ function HeroCard({ project, index }: { project: Project; index: string }) {
           <img
             src={project.image}
             alt={project.title}
+            width={1800}
+            height={772}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
@@ -524,7 +527,10 @@ function StandardCard({ project, index }: { project: Project; index: string }) {
           <img
             src={project.image}
             alt={project.title}
+            width={1200}
+            height={900}
             loading="lazy"
+            decoding="async"
             className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
               isLocked ? "opacity-70 [filter:grayscale(0.6)]" : ""
             }`}

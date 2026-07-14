@@ -179,11 +179,21 @@ export default function Aurora(props: AuroraProps) {
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
+    let visible = true;
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0]?.isIntersecting ?? true;
+      },
+      { threshold: 0 },
+    );
+    io.observe(ctn);
+
     let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
-      // Skip GPU work while the tab is hidden to save battery/CPU.
+      // Skip GPU work while the tab is hidden or the canvas is off-screen.
       if (typeof document !== "undefined" && document.hidden) return;
+      if (!visible) return;
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       const effSpeed = reduceMotion ? 0 : speed;
       program!.uniforms.uTime.value = time * effSpeed * 0.1;
@@ -202,6 +212,7 @@ export default function Aurora(props: AuroraProps) {
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener("resize", resize);
+      io.disconnect();
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }
