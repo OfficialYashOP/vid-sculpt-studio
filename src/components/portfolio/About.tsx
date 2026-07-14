@@ -11,7 +11,7 @@ export function About() {
       id="about"
       className="relative border-t border-white/[0.06] bg-background"
     >
-      <div className="mx-auto max-w-6xl px-6 py-24 sm:px-10 sm:py-32">
+      <div className="mx-auto max-w-6xl px-6 pt-24 pb-16 sm:px-10 sm:pt-32 sm:pb-20">
         <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
           {/* LEFT — photo + name plate */}
           <Reveal className="lg:sticky lg:top-24 lg:self-start">
