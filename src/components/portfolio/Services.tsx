@@ -1,107 +1,149 @@
-import BlurText from "@/components/BlurText";
-import GradientText from "@/components/GradientText";
-import SpotlightCard from "@/components/SpotlightCard";
-import BorderGlow from "@/components/BorderGlow";
-import {
-  Clapperboard,
-  Megaphone,
-  Wand2,
-  ImageIcon,
-  AudioLines,
-  TrendingUp,
-} from "lucide-react";
 import { Reveal } from "./Reveal";
 
-const services = [
+type Category = "Video" | "Design" | "Audio" | "Strategy";
+
+type Service = {
+  category: Category;
+  title: string;
+  desc: string;
+  featured?: boolean;
+};
+
+const services: Service[] = [
   {
-    icon: Clapperboard,
+    category: "Video",
     title: "AI Short Films & Cinematic Content",
     desc: "Full narrative pieces generated and edited for pacing, tone, and emotional impact.",
   },
   {
-    icon: Megaphone,
+    category: "Video",
     title: "UGC & Marketing Ad Videos",
-    desc: "Authentic, feed-native ads and creator-style content built to convert.",
+    desc: "Authentic, feed-native ads and creator-style content built to convert. Currently the flagship service — most of my recent work sits here.",
+    featured: true,
   },
   {
-    icon: Wand2,
+    category: "Video",
     title: "Image-to-Video Generation",
     desc: "Turning stills and concepts into motion with the latest image-to-video models.",
   },
   {
-    icon: ImageIcon,
+    category: "Design",
     title: "Thumbnail & Visual Design",
     desc: "Scroll-stopping thumbnails and key art crafted for click-through.",
   },
   {
-    icon: AudioLines,
+    category: "Audio",
     title: "Sound Design",
     desc: "Score, SFX, and mix work that gives every cut its cinematic weight.",
   },
   {
-    icon: TrendingUp,
+    category: "Strategy",
     title: "Content Strategy & Growth",
     desc: "Retention-first strategy, trend analysis, and creative direction.",
   },
 ];
 
+const categoryColor: Record<Category, string> = {
+  Video: "text-foreground",
+  Design: "text-foreground",
+  Audio: "text-foreground",
+  Strategy: "text-foreground",
+};
+
+const SERIF = '"Fraunces", "Times New Roman", serif';
+const MONO = '"JetBrains Mono", ui-monospace, monospace';
+
 export function Services() {
   return (
-    <section className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-28">
+    <section className="relative mx-auto max-w-6xl px-6 py-24 sm:px-10 sm:py-32">
       <Reveal>
-        <p className="mb-4 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.3em] text-gold">
-          <span className="h-px w-10 bg-gold" /> What I Do
+        <p
+          className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em] text-muted-foreground"
+          style={{ fontFamily: MONO }}
+        >
+          <span className="h-px w-8 bg-foreground/30" />
+          What I Do
+          <span className="ml-2 text-muted-foreground/50">— 06 services</span>
         </p>
       </Reveal>
       <Reveal delay={1}>
-        <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          <GradientText colors={["#e6b352", "#f4b8d0", "#8fd0ff", "#e6b352"]} animationSpeed={6} className="!max-w-full [&>.text-content]:whitespace-normal">
-            Services built for the new creative pipeline
-          </GradientText>
+        <h2
+          className="mt-8 max-w-3xl text-[clamp(2.5rem,5vw,4.25rem)] leading-[1.02] tracking-[-0.02em] text-foreground"
+          style={{ fontFamily: SERIF, fontWeight: 400 }}
+        >
+          Services built for
+          <br />
+          <span style={{ fontStyle: "italic", fontWeight: 300 }} className="text-foreground/70">
+            the new creative pipeline.
+          </span>
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((s, i) => (
-          <Reveal key={s.title} delay={i} className="h-full">
-            <BorderGlow
-              borderRadius={22}
-              glowRadius={28}
-              glowColor="40 90 62"
-              backgroundColor="#17171b"
-              colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}
-              className="h-full"
-            >
-            <SpotlightCard
-              spotlightColor="rgba(230, 179, 82, 0.22)"
-              className="group relative h-full overflow-hidden !rounded-[22px] border border-white/5 bg-gradient-to-br from-card/95 via-card/70 to-card/40 p-7 shadow-card backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-card-hover"
-            >
-              {/* glow accent */}
-              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              {/* top gradient hairline */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      {/* Editorial grid — hairline separators, no card boxes */}
+      <div className="mt-20 grid grid-cols-1 gap-px bg-white/[0.06] md:grid-cols-6 md:auto-rows-fr">
+        {services.map((s) => {
+          // Featured card spans 2 cols on desktop
+          const span = s.featured ? "md:col-span-4" : "md:col-span-2";
+          return (
+            <Reveal key={s.title} className={`h-full ${span}`}>
+              <article
+                className={`group relative flex h-full flex-col justify-between overflow-hidden bg-background p-8 transition-colors duration-500 hover:bg-card sm:p-10 ${
+                  s.featured ? "md:p-12" : ""
+                }`}
+              >
+                {/* Category tag — the only "accent" moment, and only for featured */}
+                <div className="flex items-baseline justify-between">
+                  <span
+                    className={`text-[10px] uppercase tracking-[0.32em] ${
+                      s.featured ? "text-gold" : "text-muted-foreground"
+                    }`}
+                    style={{ fontFamily: MONO }}
+                  >
+                    {s.category}
+                  </span>
+                  {s.featured && (
+                    <span
+                      className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-gold/90"
+                      style={{ fontFamily: MONO }}
+                    >
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold shadow-[0_0_12px_var(--gold)] motion-reduce:animate-none" />
+                      Flagship
+                    </span>
+                  )}
+                </div>
 
-              {/* index badge */}
-              <span className="absolute right-6 top-6 font-display text-4xl font-bold leading-none text-white/[0.04] transition-colors duration-500 group-hover:text-gold/15">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+                <div className="mt-16">
+                  <h3
+                    className={`tracking-[-0.01em] transition-colors duration-500 ${categoryColor[s.category]} ${
+                      s.featured
+                        ? "text-[clamp(2rem,3.4vw,2.75rem)] leading-[1.05]"
+                        : "text-[clamp(1.5rem,2.2vw,1.85rem)] leading-[1.1]"
+                    }`}
+                    style={{ fontFamily: SERIF, fontWeight: 400 }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p
+                    className={`mt-4 leading-relaxed text-muted-foreground ${
+                      s.featured ? "max-w-[52ch] text-base" : "max-w-[38ch] text-sm"
+                    }`}
+                  >
+                    {s.desc}
+                  </p>
+                </div>
 
-              <div className="relative mb-6 inline-flex rounded-xl bg-gradient-to-br from-gold/20 to-gold/5 p-3.5 text-gold ring-1 ring-inset ring-gold/20 transition-all duration-500 group-hover:from-gold group-hover:to-gold group-hover:text-primary-foreground group-hover:shadow-[0_8px_24px_-8px_rgba(230,179,82,0.6)]">
-                <s.icon className="h-6 w-6" />
-              </div>
-              <h3 className="relative text-lg font-bold tracking-tight transition-colors duration-500 group-hover:text-gold">
-                <GradientText colors={["#e6b352", "#f4b8d0", "#8fd0ff", "#e6b352"]} animationSpeed={5} className="!max-w-full [&>.text-content]:whitespace-normal">
-                  {s.title}
-                </GradientText>
-              </h3>
-              <p className="relative mt-2.5 text-sm leading-relaxed text-muted-foreground/90">{s.desc}</p>
-
-              {/* bottom accent line */}
-              <div className="relative mt-6 h-px w-10 bg-gold/30 transition-all duration-500 group-hover:w-16 group-hover:bg-gold" />
-            </SpotlightCard>
-            </BorderGlow>
-          </Reveal>
-        ))}
+                {/* Bottom rail — subtle hover line that goes edge-to-edge (one deliberate motion) */}
+                <div className="pointer-events-none mt-14">
+                  <span
+                    className={`block h-px origin-left scale-x-0 transition-transform duration-700 ease-out group-hover:scale-x-100 motion-reduce:group-hover:scale-x-0 ${
+                      s.featured ? "bg-gold" : "bg-foreground/60"
+                    }`}
+                  />
+                </div>
+              </article>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
