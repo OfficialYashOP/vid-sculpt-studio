@@ -2,10 +2,11 @@ import { useState, type FormEvent } from "react";
 import BlurText from "@/components/BlurText";
 import StarBorder from "@/components/StarBorder";
 import BorderGlow from "@/components/BorderGlow";
-import { Mail, Linkedin, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, ArrowRight, FileText, Download } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Reveal } from "./Reveal";
+import cvAsset from "@/assets/Yash-CV.pdf.asset.json";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
@@ -25,6 +26,13 @@ const contacts = [
     label: "LinkedIn",
     value: "in/yashpandeyofficial007",
     href: "https://linkedin.com/in/yashpandeyofficial007",
+  },
+  {
+    icon: FileText,
+    label: "Resume / CV",
+    value: "View or download PDF",
+    href: cvAsset.url,
+    external: true,
   },
 ];
 
@@ -78,19 +86,22 @@ export function Contact() {
               <BorderGlow borderRadius={18} glowRadius={26} glowColor="40 90 62" backgroundColor="#17171b" colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}>
                 <a
                   href={c.href}
-                  target={c.label === "LinkedIn" ? "_blank" : undefined}
+                  target={c.label === "Email" ? undefined : "_blank"}
                   rel="noreferrer"
                   className="group flex items-center gap-4 rounded-[18px] bg-card/70 p-5 transition-colors duration-300 hover:bg-card"
                 >
                   <span className="inline-flex shrink-0 rounded-xl bg-gold/12 p-3 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-primary-foreground">
                     <c.icon className="h-5 w-5" />
                   </span>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="text-xs uppercase tracking-widest text-muted-foreground">
                       {c.label}
                     </p>
                     <p className="font-medium [overflow-wrap:anywhere]">{c.value}</p>
                   </div>
+                  {c.label === "Resume / CV" && (
+                    <Download className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-gold" />
+                  )}
                 </a>
               </BorderGlow>
             </Reveal>
