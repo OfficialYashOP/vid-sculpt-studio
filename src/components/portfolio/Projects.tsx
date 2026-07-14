@@ -22,6 +22,10 @@ import pandaForestVideo from "@/assets/panda-forest.mp4.asset.json";
 import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
 import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
 import ranaSangaVideo from "@/assets/rana-sanga.mp4.asset.json";
+import pinkPhoolVideo from "@/assets/pink-phool.mp4.asset.json";
+import pinkPhoolPoster from "@/assets/pink-phool-poster.jpg.asset.json";
+import fastFiredVideo from "@/assets/fastfired-teaser.mp4.asset.json";
+import fastFiredPoster from "@/assets/fastfired-poster.jpg.asset.json";
 
 const SERIF = '"Fraunces", "Times New Roman", serif';
 const MONO = '"JetBrains Mono", ui-monospace, monospace';
@@ -124,6 +128,24 @@ const projects: Project[] = [
     format: "Social Ad",
     tools: ["Seedance 2"],
     videos: [{ label: "Play reel", src: ugcVideo.url, poster: ugcPoster.url }],
+  },
+  {
+    title: "FastFired India",
+    category: "Product Ads",
+    image: fastFiredPoster.url,
+    hook: "A cinematic launch teaser for FastFired's India debut — a dough-toss frozen mid-air over open flame, wood-fired oven reveal, and a campaign tagline built for reach.",
+    format: "Brand Teaser",
+    tools: ["Kling 3.0", "Seedance 2", "Sound Design"],
+    videos: [{ label: "Watch teaser", src: fastFiredVideo.url, poster: fastFiredPoster.url }],
+  },
+  {
+    title: "Pink Phool Collection",
+    category: "Product Ads",
+    image: pinkPhoolPoster.url,
+    hook: "A creator-style fashion drop for the Pink Phool floral kurta collection — outdoor street walk, close-up fabric detail, shot to feel native to social feeds.",
+    format: "Fashion / UGC",
+    tools: ["Seedance 2", "Kling 3.0"],
+    videos: [{ label: "Play ad", src: pinkPhoolVideo.url, poster: pinkPhoolPoster.url }],
   },
   {
     title: "Coffee Commercial",
