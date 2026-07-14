@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import BlurText from "@/components/BlurText";
 import BorderGlow from "@/components/BorderGlow";
 
 import { AnimatePresence, motion } from "motion/react";
@@ -24,11 +23,14 @@ import pandaBabyPoster from "@/assets/panda-baby-poster.jpg.asset.json";
 import pandaForestPoster from "@/assets/panda-forest-poster.jpg.asset.json";
 import ranaSangaVideo from "@/assets/rana-sanga.mp4.asset.json";
 
-/** Tiny, dependency-free "pop" click sound via the Web Audio API. */
+const SERIF = '"Fraunces", "Times New Roman", serif';
+const MONO = '"JetBrains Mono", ui-monospace, monospace';
+
+/** Tiny "pop" click sound via the Web Audio API. */
 let _audioCtx: AudioContext | null = null;
 function playPop() {
   try {
-    const AC = window.AudioContext || (window as any).webkitAudioContext;
+    const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (!AC) return;
     _audioCtx = _audioCtx || new AC();
     const ctx = _audioCtx;
@@ -55,9 +57,7 @@ type Category = "Short Film" | "Product Ads" | "UGC" | "Animation" | "AI Influen
 interface VideoItem {
   label: string;
   poster: string;
-  /** Direct video file URL — plays inline in the popup. */
   src?: string;
-  /** External link (e.g. YouTube) — opens in a new tab. */
   link?: string;
 }
 
@@ -66,7 +66,14 @@ interface Project {
   category: Category;
   image: string;
   hook: string;
-  tags: string[];
+  /** Genre / format — one word, mono caps. */
+  format: string;
+  /** AI tools / models used — outlined pills. */
+  tools: string[];
+  /** Optional credit line — appears only on hero card. */
+  credit?: string;
+  /** Optional runtime / spec. */
+  runtime?: string;
   featured?: boolean;
   meta?: string;
   link?: string;
@@ -76,20 +83,33 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Seedance 2 — AI Short Film",
+    title: "Oryx & Crake",
     category: "Short Film",
     image: seedance2.url,
-    hook: "A 12-minute AI-generated short film created with Seedance 2 — a cinematic, studio-grade production made entirely with AI video tools and crafted for storytelling, pacing, and sound.",
-    tags: ["Seedance 2", "12 Minutes", "AI Short Film"],
+    hook: "A twelve-minute AI-generated short film — a full studio-grade production built end-to-end with generative video. Written, directed, edited and scored for pacing, restraint, and real cinematic weight.",
+    format: "AI Short Film",
+    tools: ["Seedance 2", "Kling 3.0", "Sound Design"],
+    credit: "Written, directed & edited by Yash Pandey",
+    runtime: "12 MIN · 2026",
     featured: true,
     link: "https://www.youtube.com/watch?v=g4vHot5uwmg",
   },
   {
-    title: "Pixar-Style Hair Care Ads",
+    title: "Rana Sanga",
+    category: "Animation",
+    image: ranaSanga.url,
+    hook: "An AI-animated historical short retelling the story of Rana Sanga.",
+    format: "Historical Animation",
+    tools: ["AI Animation", "Kling 3.0"],
+    videos: [{ label: "Play film", src: ranaSangaVideo.url, poster: ranaSanga.url }],
+  },
+  {
+    title: "Hair Care — Pixar Style",
     category: "Product Ads",
     image: haircare.url,
-    hook: "Stylized 3D-animation-inspired product ads for a hair care brand.",
-    tags: ["Seedance 2.0", "Pixar Style", "Product Ad"],
+    hook: "Stylized 3D-inspired product ads for a hair care brand.",
+    format: "Product Ad",
+    tools: ["Seedance 2"],
     meta: "2 videos",
     videos: [
       { label: "9:16 TikTok Style Ad", src: haircareVideo1.url, poster: haircarePoster1.url },
@@ -97,27 +117,30 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "UGC-Style Reel",
+    title: "UGC Reel",
     category: "UGC",
     image: ugcPoster.url,
-    hook: "An authentic, creator-style short-form ad built to feel native to social feeds.",
-    tags: ["Seedance 2.0", "UGC", "Social Ad"],
+    hook: "A creator-style short-form ad built to feel native to social feeds.",
+    format: "Social Ad",
+    tools: ["Seedance 2"],
     videos: [{ label: "Play reel", src: ugcVideo.url, poster: ugcPoster.url }],
   },
   {
-    title: "Professional Coffee Ad",
+    title: "Coffee Commercial",
     category: "Product Ads",
     image: coffeePoster.url,
-    hook: "A polished, premium-look product commercial for a coffee brand.",
-    tags: ["Kling 3.0", "Product Commercial"],
+    hook: "A premium-look product commercial for a coffee brand.",
+    format: "Product Ad",
+    tools: ["Kling 3.0"],
     videos: [{ label: "Play ad", src: coffeeVideo.url, poster: coffeePoster.url }],
   },
   {
-    title: "Panda Animation Series",
+    title: "Panda Series",
     category: "Animation",
     image: pandaBabyPoster.url,
     hook: "Short animated videos featuring an expressive panda character.",
-    tags: ["Veo 3.1", "Character Animation"],
+    format: "Character Animation",
+    tools: ["Veo 3.1"],
     meta: "2 videos",
     videos: [
       { label: "Baby Panda in the Snow", src: pandaBabyVideo.url, poster: pandaBabyPoster.url },
@@ -125,26 +148,13 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Rana Sanga — Animated History Film",
-    category: "Animation",
-    image: ranaSanga.url,
-    hook: "An AI-animated historical short retelling the story of Rana Sanga — dramatic, cinematic storytelling brought to life with AI video tools.",
-    tags: ["AI Animation", "History", "Cinematic Short"],
-    videos: [{ label: "Play film", src: ranaSangaVideo.url, poster: ranaSanga.url }],
-  },
-  {
-    title: "AI Influencer Creation",
+    title: "AI Influencers",
     category: "AI Influencers",
     image: influencer.url,
-    hook: "Fully AI-generated virtual influencer personas with consistent character design.",
-    tags: [
-      "Character Consistency",
-      "Character Reels",
-      "Kling Motion Control",
-      "Nano Banana Pro",
-      "Seedance 2",
-    ],
-    meta: "2 clients",
+    hook: "Fully AI-generated virtual influencer personas with consistent character design across a full content pipeline.",
+    format: "Virtual Persona",
+    tools: ["Kling Motion Control", "Nano Banana Pro", "Seedance 2"],
+    meta: "2 clients · 150K+ combined",
     privacy: true,
   },
 ];
@@ -195,10 +205,7 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
         <X className="h-5 w-5" />
       </button>
 
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-5xl"
-      >
+      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-5xl">
         {active && active.src ? (
           <>
             <BorderGlow
@@ -262,7 +269,9 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
         ) : (
           <div>
             <div className="mb-6 text-center">
-              <h3 className="font-display text-2xl tracking-tight sm:text-3xl">{project.title}</h3>
+              <h3 className="text-2xl tracking-tight sm:text-3xl" style={{ fontFamily: SERIF, fontWeight: 400 }}>
+                {project.title}
+              </h3>
               <p className="mt-2 text-sm text-muted-foreground">Choose a video to play</p>
             </div>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -300,7 +309,6 @@ function VideoModal({ project, onClose }: { project: Project; onClose: () => voi
           </div>
         )}
       </div>
-
     </motion.div>,
     document.body,
   );
@@ -346,233 +354,315 @@ function YouTubeModal({ id, onClose }: { id: string; onClose: () => void }) {
   );
 }
 
-function Card({ project }: { project: Project }) {
-  const [showPrivacy, setShowPrivacy] = useState(false);
+/* -------------------------------- Cards -------------------------------- */
+
+function ToolTags({ tools, className = "" }: { tools: string[]; className?: string }) {
+  return (
+    <div className={`flex flex-wrap gap-1.5 ${className}`}>
+      {tools.map((t, i) => (
+        <span
+          key={t}
+          className={`inline-flex items-center rounded-full px-2.5 py-1 text-[10.5px] uppercase leading-none tracking-[0.16em] ${
+            i === 0
+              ? "border border-foreground/30 bg-foreground/[0.06] text-foreground"
+              : "border border-white/10 text-muted-foreground"
+          }`}
+          style={{ fontFamily: MONO }}
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function FormatTag({ format, index }: { format: string; index: string }) {
+  return (
+    <div className="flex items-center gap-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground" style={{ fontFamily: MONO }}>
+      <span className="text-muted-foreground/60">{index}</span>
+      <span className="h-px w-6 bg-white/15" />
+      <span>{format}</span>
+    </div>
+  );
+}
+
+function HeroCard({ project, index }: { project: Project; index: string }) {
   const [showVideo, setShowVideo] = useState(false);
   const [showYouTube, setShowYouTube] = useState(false);
-  const [showAllTags, setShowAllTags] = useState(false);
   const hasVideos = !!project.videos?.length;
   const youTubeId = project.link ? getYouTubeId(project.link) : null;
-  const cardRef = useRef<HTMLElement>(null);
-
-  const MAX_TAGS = project.featured ? 4 : 2;
-  const visibleTags = showAllTags ? project.tags : project.tags.slice(0, MAX_TAGS);
-  const hiddenCount = project.tags.length - visibleTags.length;
 
   const activate = () => {
     playPop();
-    if (project.privacy) setShowPrivacy((v) => !v);
-    else if (hasVideos) setShowVideo(true);
+    if (hasVideos) setShowVideo(true);
     else if (youTubeId) setShowYouTube(true);
     else if (project.link) window.open(project.link, "_blank", "noreferrer");
   };
 
-  useEffect(() => {
-    if (!showPrivacy) return;
-    const handleOutside = (e: MouseEvent) => {
-      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
-        setShowPrivacy(false);
-      }
-    };
-    const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setShowPrivacy(false);
-    document.addEventListener("mousedown", handleOutside);
-    document.addEventListener("keydown", handleEsc);
-    return () => {
-      document.removeEventListener("mousedown", handleOutside);
-      document.removeEventListener("keydown", handleEsc);
-    };
-  }, [showPrivacy]);
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative sm:col-span-2 lg:col-span-3"
+    >
+      <button
+        type="button"
+        onClick={activate}
+        aria-label={`Play ${project.title}`}
+        className="relative block w-full overflow-hidden rounded-sm border border-white/[0.08] bg-card text-left"
+      >
+        <div className="relative aspect-[21/9] w-full overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+
+          {/* Runtime tag — top-left, mono */}
+          {project.runtime && (
+            <span
+              className="absolute left-5 top-5 rounded-full border border-white/15 bg-background/40 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-foreground backdrop-blur-md sm:left-8 sm:top-8"
+              style={{ fontFamily: MONO }}
+            >
+              {project.runtime}
+            </span>
+          )}
+
+          {/* Hero play — bottom-left, integrated with the caption. Only on hover. */}
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-5 sm:p-8 md:p-10">
+            <div className="max-w-2xl">
+              <FormatTag format={project.format} index={index} />
+              <h3
+                className="mt-3 text-[clamp(2rem,5vw,3.75rem)] leading-[0.98] tracking-[-0.02em] text-foreground"
+                style={{ fontFamily: SERIF, fontWeight: 400 }}
+              >
+                {project.title.split(" & ").length === 2 ? (
+                  <>
+                    {project.title.split(" & ")[0]}{" "}
+                    <span style={{ fontStyle: "italic", fontWeight: 300 }} className="text-foreground/85">
+                      & {project.title.split(" & ")[1]}
+                    </span>
+                  </>
+                ) : (
+                  project.title
+                )}
+              </h3>
+            </div>
+
+            <span
+              className="hidden shrink-0 items-center gap-3 rounded-full border border-white/20 bg-background/50 px-5 py-3 text-[11px] uppercase tracking-[0.28em] text-foreground opacity-0 backdrop-blur-md transition-all duration-500 group-hover:opacity-100 motion-reduce:transition-none sm:flex"
+              style={{ fontFamily: MONO }}
+            >
+              <span className="flex h-2 w-2 items-center justify-center">
+                <Play className="h-2.5 w-2.5 translate-x-[1px] text-gold" fill="currentColor" />
+              </span>
+              Play film
+            </span>
+          </div>
+        </div>
+      </button>
+
+      {/* Caption strip below — real editorial credit */}
+      <div className="mt-5 grid gap-6 border-t border-white/[0.08] pt-5 md:grid-cols-[1.5fr_1fr] md:gap-12">
+        <p className="max-w-2xl text-[15px] leading-[1.7] text-muted-foreground">
+          {project.hook}
+        </p>
+        <div className="flex flex-col gap-3 text-[11px] uppercase tracking-[0.24em] text-muted-foreground" style={{ fontFamily: MONO }}>
+          {project.credit && <span className="text-foreground/80">{project.credit}</span>}
+          <ToolTags tools={project.tools} />
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {hasVideos && showVideo && <VideoModal project={project} onClose={() => setShowVideo(false)} />}
+        {youTubeId && showYouTube && <YouTubeModal id={youTubeId} onClose={() => setShowYouTube(false)} />}
+      </AnimatePresence>
+    </motion.article>
+  );
+}
+
+function StandardCard({ project, index }: { project: Project; index: string }) {
+  const [showVideo, setShowVideo] = useState(false);
+  const [showYouTube, setShowYouTube] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
+  const hasVideos = !!project.videos?.length;
+  const youTubeId = project.link ? getYouTubeId(project.link) : null;
+  const isLocked = !!project.privacy;
+
+  const activate = () => {
+    if (isLocked) return;
+    playPop();
+    if (hasVideos) setShowVideo(true);
+    else if (youTubeId) setShowYouTube(true);
+    else if (project.link) window.open(project.link, "_blank", "noreferrer");
+  };
 
   return (
-    <BorderGlow
-      borderRadius={22}
-      glowRadius={30}
-      glowColor="40 90 62"
-      backgroundColor="#17171b"
-      colors={["#e6b352", "#f4b8d0", "#8fd0ff"]}
-      className={`h-full ${project.featured ? "sm:col-span-2" : ""}`.trim()}
-    >
     <motion.article
       ref={cardRef}
       layout
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[22px] bg-card shadow-card transition-shadow duration-500 hover:shadow-card-hover"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative flex flex-col"
     >
-      <div className={`relative w-full overflow-hidden ${project.featured ? "aspect-video" : "aspect-[4/3]"}`}>
-        <img
-          src={project.image}
-          alt={project.title}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-        />
-        {/* subtle top-right scrim just to keep the play button legible on bright frames */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-bl from-background/40 via-transparent to-transparent" />
+      <button
+        type="button"
+        onClick={activate}
+        aria-label={isLocked ? `${project.title} — client-gated` : `Play ${project.title}`}
+        className={`relative block w-full overflow-hidden rounded-sm border border-white/[0.08] bg-card text-left ${
+          isLocked ? "cursor-default" : ""
+        }`}
+      >
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
+              isLocked ? "opacity-70 [filter:grayscale(0.6)]" : ""
+            }`}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" />
 
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            activate();
-          }}
-          aria-label={project.privacy ? `${project.title} — client privacy notice` : `Play ${project.title}`}
-          className="group/play absolute right-3 top-3 z-30 transition-opacity duration-300 sm:right-4 sm:top-4"
-        >
-          <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-card/70 text-gold shadow-lg ring-1 ring-gold/40 backdrop-blur-md transition-all duration-300 group-hover/play:bg-gold group-hover/play:text-primary-foreground group-hover/play:shadow-[0_0_22px_rgba(230,179,82,0.6)] group-hover/play:ring-gold group-active/play:scale-90 motion-reduce:transition-none motion-reduce:group-active/play:scale-100 sm:h-12 sm:w-12">
-            {/* pulsing halo — only on direct play-button hover, disabled for reduced motion */}
-            {!project.privacy && (
-              <span className="pointer-events-none absolute inset-0 rounded-full bg-gold/40 opacity-0 transition-opacity duration-300 group-hover/play:opacity-70 group-hover/play:motion-safe:animate-ping" />
-            )}
-            {project.privacy ? (
-              <Lock className="relative h-5 w-5 sm:h-6 sm:w-6" />
-            ) : (
-              <Play className="relative h-5 w-5 translate-x-0.5 transition-transform duration-300 group-hover/play:scale-110 motion-reduce:transition-none motion-reduce:group-hover/play:scale-100 sm:h-6 sm:w-6" fill="currentColor" />
-            )}
-          </span>
-        </button>
-
-        {project.privacy && showPrivacy && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/85 p-6 text-center backdrop-blur-sm">
-            <div>
-              <Lock className="mx-auto mb-3 h-7 w-7 text-gold" />
-              <p className="text-sm leading-relaxed text-foreground">
-                We can't show these due to client privacy — both models combined
-                have over <span className="font-semibold text-gold">150K followers</span>.
-              </p>
+          {/* Locked state — deliberate label, not a stray icon */}
+          {isLocked && (
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 bg-background/30 backdrop-blur-[2px]">
+              <Lock className="h-4 w-4 text-foreground/70" />
+              <span
+                className="rounded-full border border-white/20 bg-background/60 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-foreground/90 backdrop-blur-md"
+                style={{ fontFamily: MONO }}
+              >
+                Client-gated · Under NDA
+              </span>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* whole-thumbnail click target (no hover animation — that's reserved for the play button) */}
-        <button
-          type="button"
-          onClick={activate}
-          aria-label={project.privacy ? `${project.title} — client privacy notice` : `Play ${project.title}`}
-          className="absolute inset-0 z-10"
-        />
-      </div>
+          {/* Play button — only on hover, subtle */}
+          {!isLocked && (
+            <span
+              aria-hidden
+              className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-background/50 text-foreground opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100 motion-reduce:transition-none"
+            >
+              <Play className="h-3.5 w-3.5 translate-x-[1px]" fill="currentColor" />
+            </span>
+          )}
+        </div>
+      </button>
 
-      <div className="flex flex-1 flex-col bg-card p-5 sm:p-6">
+      {/* Caption */}
+      <div className="mt-4 flex flex-col gap-3">
+        <FormatTag format={project.format} index={index} />
         <h3
-          className={`flex flex-wrap items-baseline gap-x-2 font-display leading-tight tracking-tight ${
-            project.featured ? "text-3xl sm:text-4xl" : "text-2xl"
-          }`}
+          className="text-[clamp(1.35rem,2vw,1.75rem)] leading-[1.05] tracking-[-0.01em] text-foreground"
+          style={{ fontFamily: SERIF, fontWeight: 400 }}
         >
-          <span>{project.title}</span>
+          {project.title}
           {project.meta && (
-            <span className="text-sm font-sans font-medium text-muted-foreground">
+            <span className="ml-2 text-xs uppercase tracking-[0.24em] text-muted-foreground" style={{ fontFamily: MONO }}>
               · {project.meta}
             </span>
           )}
         </h3>
-
-        <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          {visibleTags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-gold/25 bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-gold backdrop-blur-sm"
-            >
-              {t}
-            </span>
-          ))}
-          {hiddenCount > 0 && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowAllTags(true);
-              }}
-              className="relative z-20 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[10.5px] font-semibold leading-none tracking-wide text-gold transition-colors hover:bg-gold/20"
-            >
-              +{hiddenCount} more
-            </button>
-          )}
-          {showAllTags && project.tags.length > MAX_TAGS && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowAllTags(false);
-              }}
-              className="relative z-20 rounded-full border border-border bg-background/60 px-2.5 py-1 text-[10.5px] font-medium leading-none tracking-wide text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Show less
-            </button>
-          )}
-        </div>
-
-        <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out motion-reduce:transition-none sm:grid-rows-[0fr] sm:group-hover:grid-rows-[1fr]">
-          <div className="overflow-hidden">
-            <p className="mt-2.5 line-clamp-3 max-w-lg text-sm leading-relaxed text-muted-foreground/90 sm:line-clamp-none">
-              {project.hook}
-            </p>
-          </div>
-        </div>
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">{project.hook}</p>
+        <ToolTags tools={project.tools} className="mt-1" />
       </div>
 
-
-
       <AnimatePresence>
-        {hasVideos && showVideo && (
-          <VideoModal project={project} onClose={() => setShowVideo(false)} />
-        )}
-        {youTubeId && showYouTube && (
-          <YouTubeModal id={youTubeId} onClose={() => setShowYouTube(false)} />
-        )}
+        {hasVideos && showVideo && <VideoModal project={project} onClose={() => setShowVideo(false)} />}
+        {youTubeId && showYouTube && <YouTubeModal id={youTubeId} onClose={() => setShowYouTube(false)} />}
       </AnimatePresence>
     </motion.article>
-    </BorderGlow>
   );
 }
+
+/* -------------------------------- Section -------------------------------- */
 
 export function Projects() {
   const [active, setActive] = useState<(typeof filters)[number]>("All");
   const visible = projects.filter((p) => active === "All" || p.category === active);
+  const featured = visible.find((p) => p.featured);
+  const rest = visible.filter((p) => !p.featured);
 
   return (
-    <section id="work" className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-28">
-      <Reveal>
-        <p className="mb-4 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.3em] text-gold">
-          <span className="h-px w-10 bg-gold" /> Featured Work
-        </p>
-      </Reveal>
-      <Reveal delay={1}>
-        <h2 className="max-w-2xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          <BlurText text="Selected AI video projects" animateBy="words" className="flex-wrap" />
-        </h2>
-      </Reveal>
-
-      <Reveal delay={2}>
-        <div className="mt-9 flex flex-wrap gap-2.5">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                active === f
-                  ? "bg-gold text-primary-foreground"
-                  : "border border-border text-muted-foreground hover:border-gold/40 hover:text-foreground"
-              }`}
+    <section id="work" className="relative border-t border-white/[0.06] bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-32">
+        {/* Header — no kicker dash */}
+        <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
+          <Reveal>
+            <h2
+              className="text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.98] tracking-[-0.02em] text-foreground"
+              style={{ fontFamily: SERIF, fontWeight: 400 }}
             >
-              {f}
-            </button>
-          ))}
+              Selected{" "}
+              <span style={{ fontStyle: "italic", fontWeight: 300 }} className="text-foreground/80">
+                work.
+              </span>
+            </h2>
+          </Reveal>
+          <Reveal delay={1}>
+            <p
+              className="max-w-[28ch] text-xs uppercase tracking-[0.28em] text-muted-foreground"
+              style={{ fontFamily: MONO }}
+            >
+              {projects.length} projects · shipped 2025–2026
+            </p>
+          </Reveal>
         </div>
-      </Reveal>
 
-      <motion.div
-        layout
-        className="mt-10 grid auto-rows-auto grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        <AnimatePresence mode="popLayout">
-          {visible.map((p) => (
-            <Card key={p.title} project={p} />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+        {/* Filters — underlined text tabs, not pills */}
+        <Reveal delay={2}>
+          <div
+            role="tablist"
+            className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-b border-white/[0.08] pb-3"
+            style={{ fontFamily: MONO }}
+          >
+            {filters.map((f) => {
+              const isActive = active === f;
+              return (
+                <button
+                  key={f}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActive(f)}
+                  className={`relative pb-2 text-[11px] uppercase tracking-[0.28em] transition-colors duration-300 motion-reduce:transition-none ${
+                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground/80"
+                  }`}
+                >
+                  {f}
+                  {isActive && (
+                    <motion.span
+                      layoutId="filter-underline"
+                      className="absolute -bottom-[13px] left-0 right-0 h-px bg-gold"
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </Reveal>
+
+        {/* Grid */}
+        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {featured && <HeroCard key={featured.title} project={featured} index="00" />}
+            {rest.map((p, i) => (
+              <StandardCard
+                key={p.title}
+                project={p}
+                index={String(i + 1).padStart(2, "0")}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
     </section>
   );
 }
