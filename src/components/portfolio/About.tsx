@@ -21,6 +21,9 @@ export function About() {
                 <motion.img
                   src={portrait.url}
                   alt="Yash Pandey"
+                  width={1122}
+                  height={1402}
+                  decoding="async"
                   initial={{ scale: 1.04, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
