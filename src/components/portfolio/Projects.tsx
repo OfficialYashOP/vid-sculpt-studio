@@ -418,7 +418,10 @@ function HeroCard({ project, index }: { project: Project; index: string }) {
           <img
             src={project.image}
             alt={project.title}
+            width={1800}
+            height={772}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
