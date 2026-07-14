@@ -527,7 +527,10 @@ function StandardCard({ project, index }: { project: Project; index: string }) {
           <img
             src={project.image}
             alt={project.title}
+            width={1200}
+            height={900}
             loading="lazy"
+            decoding="async"
             className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100 ${
               isLocked ? "opacity-70 [filter:grayscale(0.6)]" : ""
             }`}
