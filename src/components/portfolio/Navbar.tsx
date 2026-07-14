@@ -17,7 +17,8 @@ export function Navbar() {
 
   useEffect(() => {
     const ids = items.map((i) => i.href.slice(1));
-    const onScroll = () => {
+    let ticking = false;
+    const run = () => {
       let current = "#home";
       for (const id of ids) {
         const el = document.getElementById(id);
@@ -25,8 +26,14 @@ export function Navbar() {
       }
       setActiveHref(current);
       setScrolled(window.scrollY > 60);
+      ticking = false;
     };
-    onScroll();
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(run);
+    };
+    run();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -43,7 +50,7 @@ export function Navbar() {
         videoPlaying ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
       } ${
         scrolled
-          ? "border-b border-white/[0.06] bg-background/70 backdrop-blur-xl"
+          ? "border-b border-white/[0.06] bg-background/80 backdrop-blur-md"
           : "border-b border-transparent"
       }`}
     >
