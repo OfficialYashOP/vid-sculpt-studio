@@ -2,10 +2,11 @@ import { useState, type FormEvent } from "react";
 import BlurText from "@/components/BlurText";
 import StarBorder from "@/components/StarBorder";
 import BorderGlow from "@/components/BorderGlow";
-import { Mail, Linkedin, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, ArrowRight, FileText, Download } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Reveal } from "./Reveal";
+import cvAsset from "@/assets/Yash-CV.pdf.asset.json";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
@@ -25,6 +26,13 @@ const contacts = [
     label: "LinkedIn",
     value: "in/yashpandeyofficial007",
     href: "https://linkedin.com/in/yashpandeyofficial007",
+  },
+  {
+    icon: FileText,
+    label: "Resume / CV",
+    value: "View or download PDF",
+    href: cvAsset.url,
+    external: true,
   },
 ];
 
