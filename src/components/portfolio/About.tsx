@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
 import { Reveal } from "./Reveal";
-import portrait from "@/assets/yash-portrait.webp.asset.json";
+import { ReelStrip } from "./ReelStrip";
+import cv from "@/assets/Yash-CV.pdf.asset.json";
 
 const SERIF = '"Fraunces", "Times New Roman", serif';
 const MONO = '"JetBrains Mono", ui-monospace, monospace';
@@ -13,31 +13,13 @@ export function About() {
     >
       <div className="mx-auto max-w-6xl px-6 pt-24 pb-16 sm:px-10 sm:pt-32 sm:pb-20">
         <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-          {/* LEFT — photo + name plate */}
+          {/* LEFT — reel + name plate */}
           <Reveal className="lg:sticky lg:top-24 lg:self-start">
             <div className="relative">
-              {/* Photo frame — editorial: black-and-white, warm hairline, subtle grain via mix-blend */}
-              <div className="relative overflow-hidden rounded-sm border border-white/[0.08] bg-card">
-                <motion.img
-                  src={portrait.url}
-                  alt="Yash Pandey"
-                  width={1122}
-                  height={1402}
-                  decoding="async"
-                  initial={{ scale: 1.04, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="aspect-[4/5] w-full object-cover [filter:grayscale(0.35)_contrast(1.05)] transition-[filter] duration-700 hover:[filter:grayscale(0)_contrast(1)] motion-reduce:transition-none"
-                  loading="lazy"
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent"
-                />
-              </div>
+              {/* Reel strip — frames from the work itself, not a headshot */}
+              <ReelStrip />
 
-              {/* Name plate — sits half over the photo edge */}
+              {/* Name plate */}
               <div className="mt-6 flex items-baseline justify-between border-t border-white/[0.12] pt-4">
                 <div>
                   <p
@@ -59,6 +41,63 @@ export function About() {
                 >
                   IN / 2018 —
                 </p>
+              </div>
+
+              {/* Where to go from here */}
+              <div className="mt-8 border-t border-white/[0.1] pt-1">
+                <a
+                  href="#work"
+                  className="group flex items-baseline justify-between gap-4 border-b border-white/[0.06] py-3"
+                >
+                  <span
+                    className="text-[15px] text-foreground/85 transition-colors duration-300 group-hover:text-foreground"
+                    style={{ fontFamily: SERIF, fontStyle: "italic" }}
+                  >
+                    Selected work
+                  </span>
+                  <span
+                    className="shrink-0 text-[10px] uppercase tracking-[0.24em] text-muted-foreground"
+                    style={{ fontFamily: MONO }}
+                  >
+                    View ↗
+                  </span>
+                </a>
+                <a
+                  href="#contact"
+                  className="group flex items-baseline justify-between gap-4 border-b border-white/[0.06] py-3"
+                >
+                  <span
+                    className="text-[15px] text-foreground/85 transition-colors duration-300 group-hover:text-foreground"
+                    style={{ fontFamily: SERIF, fontStyle: "italic" }}
+                  >
+                    Get in touch
+                  </span>
+                  <span
+                    className="shrink-0 text-[10px] uppercase tracking-[0.24em] text-muted-foreground"
+                    style={{ fontFamily: MONO }}
+                  >
+                    Say hello ↗
+                  </span>
+                </a>
+                <a
+                  href={cv.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-baseline justify-between gap-4 py-3"
+                >
+                  <span
+                    className="text-[15px] text-foreground/85 transition-colors duration-300 group-hover:text-foreground"
+                    style={{ fontFamily: SERIF, fontStyle: "italic" }}
+                  >
+                    Curriculum vitae
+                  </span>
+                  <span
+                    className="shrink-0 text-[10px] uppercase tracking-[0.24em] text-muted-foreground"
+                    style={{ fontFamily: MONO }}
+                  >
+                    PDF ↗
+                  </span>
+                </a>
               </div>
             </div>
           </Reveal>
